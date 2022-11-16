@@ -12,3 +12,10 @@ def movie_list(request):
     movies = get_list_or_404(Movie)
     serializer = MovieSerializer(movies, many=True)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def movie_detail(request, pk):
+    movie = get_object_or_404(Movie, id=pk)
+    serializer = MovieSerializer(movie)
+    return Response(serializer.data)

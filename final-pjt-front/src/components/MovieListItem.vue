@@ -1,7 +1,8 @@
 <template>
-  <div>시준언니의 아이템❤
-
-
+  <div>
+    <router-link :to="{ name: 'detail', params: { id: movie.id } }">
+      <img :src="`https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`" :alt="movie.title">
+    </router-link>
   </div>
 </template>
 
@@ -9,8 +10,10 @@
 
 
 export default {
- name: 'MovieListItem',
-
+  name: 'MovieListItem',
+  props: {
+    movie: Object,
+  }
 }
 </script>
 

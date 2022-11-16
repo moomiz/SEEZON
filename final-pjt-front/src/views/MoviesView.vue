@@ -1,17 +1,19 @@
 <template>
   <div>
-    보이시는지,,,
+    <RecommendMovie/>
     <MovieList/>
   </div>
 </template>
 
 <script>
 import MovieList from '@/components/MovieList'
+import RecommendMovie from '@/components/RecommendMovie'
 
 export default {
   name: 'MoviesView',
   components: {
     MovieList,
+    RecommendMovie
   }
 }
 </script>
