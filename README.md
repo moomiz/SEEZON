@@ -74,8 +74,26 @@ with open('movie_list.json', 'a', encoding="UTF-8") as make_file:
 
 필요 router / components 대략적 분리
 
-
-
 => 잘 돌아가는지 확인하기 위해 장고와 뷰의 서버를 키고 axios 요청 실행
 
 => cors headers 문제로 django에서 관련 pip install.
+
+
+
+MovieList.vue (Home) 에 들어갈때마다 axios로 호출 되면 비효율적이라 생각 됨 
+
+MovieList에서 props로 MovieListItem을 불러옴
+
+MovieView에서 영화 추천 목록을 보여주기 위해 RecommendView를 가져옴 
+
+추천 영화를   carousel card 형태로 보여주기 위해 vue bootstrap 설치 
+
+=> 이미지 크기가 줄어들지 않아 해결이 필요함 
+
+MovieListItem을 클릭 했을 때 영화 상세 정보를 보여주기 위해 router-link 사용 
+
+detail 페이지 구성 (title,overview, poster-path ...)
+
+--------------------------------------------------------------------------- 11/16
+
+(추천은 장고에서 랜덤으로 10개 가져오쟝)
