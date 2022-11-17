@@ -1,5 +1,7 @@
 <template>
   <div>
+    <router-link :to="{ name: 'articlecreate' }">[CREATE]</router-link>
+    <hr>
     <ArticleList />
   </div>
 </template>

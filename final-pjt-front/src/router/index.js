@@ -6,6 +6,7 @@ import LoginView from '@/views/Account/LoginView'
 import SignUpView from '@/views/Account/SignUpView'
 import MoviesView from '@/views/Movie/MoviesView'
 import ArticleDetailView from '@/views/Article/ArticleDetailView'
+import ArticleCreateView from '@/views/Article/ArticleCreateView'
 
 Vue.use(VueRouter)
 
@@ -46,6 +47,11 @@ const routes = [
     path: '/article/:id',
     name: 'articledetail',
     component: ArticleDetailView,
+  },
+  {
+    path: '/article/create',
+    name: 'articlecreate',
+    component: ArticleCreateView,
   },
 ]
 

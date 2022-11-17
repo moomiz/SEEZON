@@ -12,6 +12,9 @@ export default new Vuex.Store({
     token: null,
   },
   getters: {
+    isLogin(state) {
+      return state.token ? true : false
+    }
   },
   mutations: {
     SAVE_TOKEN(state, token) {
@@ -43,13 +46,29 @@ export default new Vuex.Store({
           username: payload.username,
           password1: payload.password1,
           password2: payload.password2,
-        }
+        },
+        // headers: {'Content-Type': 'application/x-www-form-urlencoded' },
       })
         .then((res) => {
           // console.log(res)
           context.commit('SAVE_TOKEN', res.data.key)
         })
     },
+    createArticle(context, payload) {
+      axios({
+        method: 'post',
+        url: `${API_URL}/api/v2/articles/create/`,
+        data: {
+          title: payload.title,
+          content: payload.content,
+          token: this.state.token,
+        },
+      }).then((res)=>{
+        context.commit('CREATE_ARTICLE', res.data)
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }
 
 
   },

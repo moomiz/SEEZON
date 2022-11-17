@@ -1,7 +1,10 @@
 <template>
   <div>
+    <hr>
     <h3>{{ article?.title }}</h3>
     <p>{{ article?.content }}</p>
+    <hr>
+    <router-link to=".">[BACK]</router-link>
   </div>
 </template>
 

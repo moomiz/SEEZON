@@ -20,3 +20,11 @@ def article_detail(request, pk):
     article = get_object_or_404(Article, pk=pk)
     serializer = ArticleSerializer(article)
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+def create(request):
+    serializer = ArticleSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save(user=request.user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
