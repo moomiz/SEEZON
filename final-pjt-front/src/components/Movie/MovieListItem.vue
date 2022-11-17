@@ -38,11 +38,6 @@ export default {
 </script>
 
 <style>
-.movie-list .item {
-  padding: 16px;
-  border-radius: 4px;
-  border: solid 1px #e2e2e2;
-}
 .movie-list .item:not(:last-child) {
   margin-bottom: 8px;
 }
@@ -52,14 +47,17 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: #00000005;
 }
 .modal-route .modal-content {
-  width: 50%;
+  width: 90%;
+  height: 90%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: white;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
 }
 </style>
