@@ -1,12 +1,10 @@
 <template>
-  <div>
-    
-  </div>
+  <div>갓시준</div>
 </template>
 
 <script>
 export default {
-  name: 'MovieModal',
+    name: 'ArticleListItem'
 }
 </script>
 

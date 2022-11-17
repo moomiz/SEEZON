@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import MovieList from '@/components/MovieList'
-import RecommendMovie from '@/components/RecommendMovie'
+import MovieList from '@/components/Movie/MovieList'
+import RecommendMovie from '@/components/Recommend/RecommendMovie'
 
 export default {
   name: 'MoviesView',

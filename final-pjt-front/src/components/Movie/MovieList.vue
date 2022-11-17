@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import MovieListItem from '@/components/MovieListItem'
+import MovieListItem from '@/components/Movie/MovieListItem'
 import axios from 'axios'
 
 export default {

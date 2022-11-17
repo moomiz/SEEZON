@@ -78,8 +78,6 @@ with open('movie_list.json', 'a', encoding="UTF-8") as make_file:
 
 => cors headers 문제로 django에서 관련 pip install.
 
-
-
 MovieList.vue (Home) 에 들어갈때마다 axios로 호출 되면 비효율적이라 생각 됨 
 
 MovieList에서 props로 MovieListItem을 불러옴

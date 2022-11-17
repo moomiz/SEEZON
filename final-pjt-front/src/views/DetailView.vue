@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="movie-info">
+    <router-link to="../">X</router-link>
     <p>{{ movie?.title }}</p>
     <p>{{ movie?.overview }}</p>
     <img :src="`https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movie?.poster_path}`" :alt="movie?.title">
@@ -28,6 +29,5 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
 </style>

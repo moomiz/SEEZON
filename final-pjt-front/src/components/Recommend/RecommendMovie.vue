@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import RecommendMovieItem from '@/components/RecommendMovieItem'
+import RecommendMovieItem from '@/components/Recommend/RecommendMovieItem'
 import axios from 'axios'
 
 export default {

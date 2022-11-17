@@ -13,6 +13,13 @@ const routes = [
     path: '/',
     name: 'index',
     component: MoviesView,
+    children: [
+      {
+        path: '/movie/:id',
+        component: DetailView,
+        props: true
+      }
+    ]
   },
   {
     path: '/login',
