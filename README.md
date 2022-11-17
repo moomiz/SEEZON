@@ -96,8 +96,6 @@ detail 페이지 구성 (title,overview, poster-path ...)
 
 (추천은 장고에서 랜덤으로 10개 가져오쟝) => 이후의 예정으로 장고에서 랜덤 url을 만들어 연결된 view에서 랜덤으로 가져오면 될 것 같다.
 
-
-
 오늘은 어제 대략적으로 만들어본 무비 detail 페이지를 modal로 바꾸어 구현해볼 예정.
 
 => 관련 강의를 찾아 어떻게 만든 건지 공부하며 작성중. slot이 무엇인지 찾아볼 수 있게 되었다.
@@ -106,11 +104,7 @@ css의 transform에 대한 것도 찾아보고 공부중.
 
 html의 template에 대한 것도 찾아보고 있습니다.
 
-
-
 => scss나 sass 등 다른 게 더 필요해서 후순위로 두고 커뮤니티 기능을 우선하기로 했습니다.
-
-
 
 게시판에 들어갈 components 고민
 
@@ -127,3 +121,15 @@ html의 template에 대한 것도 찾아보고 있습니다.
 - 새글 쓰기 버튼
 
 이쯤에서 components가 너무 늘어나서 폴더를 통한 components 기능에 따른 분류
+
+게시판 글 작성을 위해 계정 생성 
+
+->성인인증이 필요해서 is_ault = null 값 부여 Article  모의 데이터 작성 
+
+-> article ,like_user가 없을 때 글이 생성 되지 않는 문제점을 발견하여 null =True , blank = True 를 작성하여 모델 수정 함 
+
+-> Foreginkey에서는 null값이 의미를 가지지만 manytomany에서는 null 은 의미를 가지지 않아 black = True 만 작성 
+
+vue 에서 django에서 생성한 Article 목록을 보여주기위해 axios로 게시판 url을 가져온 후 Article view에 출력 
+
+Article 상세 목록을 보기 위해 마찬가지로 axios 로 article detail 불러옴 
