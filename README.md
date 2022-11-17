@@ -132,4 +132,10 @@ html의 template에 대한 것도 찾아보고 있습니다.
 
 vue 에서 django에서 생성한 Article 목록을 보여주기위해 axios로 게시판 url을 가져온 후 Article view에 출력 
 
+
+
 Article 상세 목록을 보기 위해 마찬가지로 axios 로 article detail 불러옴 
+
+Movie Detail을 영화 이미지를 클릭 하였을 때  modal 창으로 띄우기 위해서 v-if문과 watch를 사용하여 showModal일 경우 router index에 있는 메타 필드에 shoModal 띄운다 
+
+-> meta 필드 란? 네이게이션 가드처럼 url은 이동하지만 url로 뜨는 창은 막고 대신 모달창을 띄어주는 역할 같은데 맞는지 교수님한테 물어보기 !!!!!!!!!!!

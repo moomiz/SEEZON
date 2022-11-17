@@ -14,6 +14,17 @@ const routes = [
     path: '/',
     name: 'index',
     component: MoviesView,
+    children: [
+      {
+        path: '/movie/:id',
+        name: 'moviedetail',
+        component: MovieDetailView,
+        props: true,
+        meta: {
+          showModal: true
+        }
+      }
+    ]
   },
   {
     path: '/login',
@@ -25,11 +36,7 @@ const routes = [
     name: 'signup',
     component: SignUpView,
   },
-  {
-    path: '/movie/:id',
-    name: 'moviedetail',
-    component: MovieDetailView,
-  },
+
   {
     path: '/article',
     name: 'article',

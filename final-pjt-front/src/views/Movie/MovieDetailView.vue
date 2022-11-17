@@ -29,5 +29,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style >
+.contact-info {
+  padding: 16px;
+}
 </style>
