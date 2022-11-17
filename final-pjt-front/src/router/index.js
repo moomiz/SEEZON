@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import ArticleView from '@/views/ArticleView'
-import DetailView from '@/views/DetailView'
-import LoginView from '@/views/LoginView'
-import SignUpView from '@/views/SignUpView'
-import MoviesView from '@/views/MoviesView'
+import ArticleView from '@/views/Article/ArticleView'
+import MovieDetailView from '@/views/Movie/MovieDetailView'
+import LoginView from '@/views/Account/LoginView'
+import SignUpView from '@/views/Account/SignUpView'
+import MoviesView from '@/views/Movie/MoviesView'
+import ArticleDetailView from '@/views/Article/ArticleDetailView'
 
 Vue.use(VueRouter)
 
@@ -13,13 +14,6 @@ const routes = [
     path: '/',
     name: 'index',
     component: MoviesView,
-    children: [
-      {
-        path: '/movie/:id',
-        component: DetailView,
-        props: true
-      }
-    ]
   },
   {
     path: '/login',
@@ -33,13 +27,18 @@ const routes = [
   },
   {
     path: '/movie/:id',
-    name: 'detail',
-    component: DetailView,
+    name: 'moviedetail',
+    component: MovieDetailView,
   },
   {
     path: '/article',
     name: 'article',
     component: ArticleView,
+  },
+  {
+    path: '/article/:id',
+    name: 'articledetail',
+    component: ArticleDetailView,
   },
 ]
 

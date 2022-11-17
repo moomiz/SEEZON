@@ -1,10 +1,15 @@
 <template>
-  <div>갓시준</div>
+  <div>
+    <router-link :to="{ name: 'articledetail', params: { id: article?.id }}">{{ article?.title }}</router-link>    
+  </div>
 </template>
 
 <script>
 export default {
-    name: 'ArticleListItem'
+    name: 'ArticleListItem',
+    props: {
+      article: Object,
+    }
 }
 </script>
 

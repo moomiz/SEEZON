@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    <router-link :to="{ name: 'signup' }">signup</router-link>
   </div>
 </template>
 

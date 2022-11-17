@@ -3,7 +3,6 @@
     <nav>
       <router-link :to="{ name: 'index' }">Home</router-link> |
       <router-link :to="{ name: 'login' }">login</router-link> |
-      <router-link :to="{ name: 'signup' }">signup</router-link> |
       <router-link :to="{ name: 'article' }">article</router-link> 
     </nav>
     <router-view/>
