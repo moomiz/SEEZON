@@ -32,7 +32,6 @@ export default {
       }
 
       this.$store.dispatch('createArticle', payload)
-      this.$router.push({ name: 'article' })
     }
   }
 }

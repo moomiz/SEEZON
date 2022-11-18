@@ -32,3 +32,13 @@ def create(request):
     if serializer.is_valid(raise_exception=True):
         serializer.save(user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def update(request, pk):
+    article = get_object_or_404(Article, pk=pk)
+    serializer = ArticleSerializer(data=request.data, instance=article)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)

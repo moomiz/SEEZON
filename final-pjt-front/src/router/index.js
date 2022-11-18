@@ -6,6 +6,7 @@ import LoginView from '@/views/Account/LoginView'
 import SignUpView from '@/views/Account/SignUpView'
 import MoviesView from '@/views/Movie/MoviesView'
 import ArticleDetailView from '@/views/Article/ArticleDetailView'
+import ArticleUpdateView from '@/views/Article/ArticleUpdateView'
 import ArticleCreateView from '@/views/Article/ArticleCreateView'
 import LogoutView from '@/views/Account/LogoutView'
 
@@ -67,6 +68,11 @@ const routes = [
     path: '/article/create',
     name: 'articlecreate',
     component: ArticleCreateView,
+  },
+  {
+    path: '/article/:id/update',
+    name: 'articleupdate',
+    component: ArticleUpdateView,
   },
 ]
 

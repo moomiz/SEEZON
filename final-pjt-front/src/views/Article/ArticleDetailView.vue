@@ -2,8 +2,10 @@
   <div>
     <hr>
     <h3>{{ article?.title }}</h3>
+    <router-link :to="{ name: 'articleupdate' }" >[UPDATE]</router-link>
     <p>{{ article?.content }}</p>
-    <p>{{ article?.comment_set }}</p>
+    <hr>
+    <ArticleCommentList :comments=article.comment_set />
     <hr>
     <router-link to=".">[BACK]</router-link>
   </div>
@@ -11,9 +13,13 @@
 
 <script>
 import axios from 'axios'
+import ArticleCommentList from '@/components/Article/ArticleCommentList'
 
 export default {
   name: 'ArticleDetailView',
+  components: {
+    ArticleCommentList,
+  },
   data() {
     return {
       article: null,

@@ -84,8 +84,27 @@ export default new Vuex.Store({
         headers: {
           Authorization: `Token ${this.state.token}`,
         }
-      }).then((res)=>{
-        context.commit('CREATE_ARTICLE', res.data)
+      }).then(()=>{  // res
+        // context.commit('CREATE_ARTICLE', res.data)
+        router.push({ name: 'article' })
+      }).catch((err)=>{
+        console.log(err)
+      })
+    },
+    articleUpdate(context, payload) {
+      axios({
+        method: 'post',
+        url: `${API_URL}/api/v2/articles/${payload.id}/update/`,
+        data: {
+          title: payload.title,
+          content: payload.content,
+        },
+        headers: {
+          Authorization: `Token ${this.state.token}`,
+        },
+      }).then(()=>{ // res
+        // context.commit('ARTICLE_UPDATE', res.data)
+        router.push({ name: 'articledetail', params: { id: payload.id } })
       }).catch((err)=>{
         console.log(err)
       })
