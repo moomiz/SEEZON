@@ -150,3 +150,8 @@ Movie Detail을 영화 이미지를 클릭 하였을 때  modal 창으로 띄우
 axios post로 url을 받아온 후 header를 작성하였고, mutations에 LOGOUT을 생성하여 token 값을 null로 지정해줌
 
 로그인, 로그 아웃 상태에 따라 router link 를 바꿔주기 위해 v-if 문을 사용해주었는데, data 함수를 사용해 초기에 store에서 getters에 있는 isLogin 상태에 따라 변경해주려고 했으나 실패하였음 -> 이후 computed에 넣어서 실행하였을때는 값이 바뀔때마다 인식하므로 변경 가능하여 실행 하였음.
+
+게시글 수정 기능 구현 -> router link를 이용하여 수정하고 싶은 게시글에서 update 버튼을 클릭하면 articleCreateView.vue로 이동하게 구성함 
+-> 이후 axios로 django에 있는 update url을 호출하여 수정하고 싶은 게시글을 가져오고 , 그 게시글의 기존에 있던 정보들을 input 창에 띄우기 위해 v-model을 사용 
+
+게시판 디테일에서 게시글에 달린 댓글 보이도록 구현 
