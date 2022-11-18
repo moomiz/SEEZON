@@ -3,6 +3,7 @@
     <hr>
     <h3>{{ article?.title }}</h3>
     <p>{{ article?.content }}</p>
+    <p>{{ article?.comment_set }}</p>
     <hr>
     <router-link to=".">[BACK]</router-link>
   </div>

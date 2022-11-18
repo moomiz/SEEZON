@@ -27,6 +27,15 @@ const routes = [
       }
     ]
   },
+  // {
+  //   path: '/movie/:id',
+  //   name: 'moviedetail',
+  //   component: MovieDetailView,
+  //   props: true,
+  //   meta: {
+  //     showModal: true
+  //   }
+  // },
   {
     path: '/login',
     name: 'login',

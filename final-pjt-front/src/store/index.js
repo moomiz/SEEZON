@@ -61,8 +61,10 @@ export default new Vuex.Store({
         data: {
           title: payload.title,
           content: payload.content,
-          token: this.state.token,
         },
+        headers: {
+          Authorization: `Token ${this.state.token}`,
+        }
       }).then((res)=>{
         context.commit('CREATE_ARTICLE', res.data)
       }).catch((err)=>{

@@ -35,11 +35,11 @@ INSTALLED_APPS = [
     'articles',
     'accounts',
     
-    'django_extensions',
+    # 'django_extensions',
     'rest_framework',
-    'rest_framework.authtoken',
-    
     'corsheaders',
+    
+    'rest_framework.authtoken',
     'dj_rest_auth',
 
     'django.contrib.sites',
@@ -59,7 +59,7 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATIONS_CLASSES':[
+    'DEFAULT_AUTHENTICATION_CLASSES':[
         'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
@@ -73,8 +73,8 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',

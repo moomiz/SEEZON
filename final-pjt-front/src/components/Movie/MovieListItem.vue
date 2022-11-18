@@ -4,7 +4,7 @@
         :to="{ name: 'moviedetail', params: { id: movie.id } }">
       <img :src="`https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`" :alt="movie.title">
     </router-link>
-    <div v-if="showModal" class="modal-route">
+    <div id="`myModal-${movie.id}`" v-if="showModal" class="modal-route">
       <div class="modal-content">
         <router-view></router-view>
       </div>
@@ -24,7 +24,7 @@ export default {
     $route: {
       immediate: true,
       handler: function(newVal) {
-        this.showModal = newVal.meta && newVal.meta.showModal;
+        this.showModal = newVal.meta && newVal.meta.showModal && this.$route.params.id === this.movie.id;
       }
     }
   },
