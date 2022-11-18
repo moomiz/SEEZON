@@ -7,6 +7,7 @@ import SignUpView from '@/views/Account/SignUpView'
 import MoviesView from '@/views/Movie/MoviesView'
 import ArticleDetailView from '@/views/Article/ArticleDetailView'
 import ArticleCreateView from '@/views/Article/ArticleCreateView'
+import LogoutView from '@/views/Account/LogoutView'
 
 Vue.use(VueRouter)
 
@@ -40,6 +41,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LoginView,
+  },
+  {
+    path: '/logout',
+    name: 'logout',
+    component: LogoutView,
   },
   {
     path: '/signup',

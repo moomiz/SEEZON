@@ -143,3 +143,10 @@ Movie Detail을 영화 이미지를 클릭 하였을 때  modal 창으로 띄우
 회원 가입할 때 csrf token이없는데 postman에서는 안되는데 vue axios로 받아올 때는 받아옴 ? 왜그러지.. 
 
 게시글 생성을 위한 article create 작성 
+
+-> article 생성 안되던 이유는 settings.py 에서 오타가 있었기 때문...
+
+로그아웃 기능 구현 ->logoutView를 생성해서 store에서 logout action을 구현 해 
+axios post로 url을 받아온 후 header를 작성하였고, mutations에 LOGOUT을 생성하여 token 값을 null로 지정해줌
+
+로그인, 로그 아웃 상태에 따라 router link 를 바꿔주기 위해 v-if 문을 사용해주었는데, data 함수를 사용해 초기에 store에서 getters에 있는 isLogin 상태에 따라 변경해주려고 했으나 실패하였음 -> 이후 computed에 넣어서 실행하였을때는 값이 바뀔때마다 인식하므로 변경 가능하여 실행 하였음.

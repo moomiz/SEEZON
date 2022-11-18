@@ -20,6 +20,9 @@ export default new Vuex.Store({
     SAVE_TOKEN(state, token) {
       state.token = token
       router.push({ name: 'index' })
+    },
+    LOGOUT(state) {
+      state.token = null
     }
 
   },
@@ -32,11 +35,27 @@ export default new Vuex.Store({
           username: payload.username,
           password: payload.password,
         }
+      }).then((res) => {
+        // console.log(res)
+        context.commit('SAVE_TOKEN', res.data.key)
+      }).catch((err)=>{
+        console.log(err)
       })
-        .then((res) => {
-          // console.log(res)
-          context.commit('SAVE_TOKEN', res.data.key)
-        })
+    },
+    logout(context) {
+      axios({
+        method:'post',
+        url: `${API_URL}/api/v3/logout/`,
+        headers: {
+          Authorization: `Token ${this.state.token}`,
+        }
+      }).then((res)=>{
+        console.log(res)
+        context.commit('LOGOUT')
+      }).catch((err)=>{
+        console.log(err)
+      })
+      
     },
     signUp(context, payload) {
       axios({

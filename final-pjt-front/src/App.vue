@@ -2,13 +2,29 @@
   <div id="app">
     <nav>
       <router-link :to="{ name: 'index' }">Home</router-link> |
-      <router-link :to="{ name: 'login' }">login</router-link> |
+      <router-link v-if="!isLogin" :to="{ name: 'login' }">login</router-link>
+      <router-link v-if="isLogin" :to="{ name: 'logout' }">logout</router-link> |
       <router-link :to="{ name: 'article' }">article</router-link> 
     </nav>
     <router-view/>
   </div>
 </template>
 
+<script>
+export default {
+  name: 'App',
+  data() {
+    return {
+    }
+  },
+  computed: {
+    isLogin() {
+      return this.$store.getters.isLogin
+    }
+  }
+}
+
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
