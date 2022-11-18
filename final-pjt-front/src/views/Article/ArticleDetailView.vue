@@ -5,6 +5,8 @@
     <router-link :to="{ name: 'articleupdate' }" >[UPDATE]</router-link>
     <p>{{ article?.content }}</p>
     <hr>
+    <CommentCreateForm />
+    <hr>
     <ArticleCommentList :comments=article.comment_set />
     <hr>
     <router-link to=".">[BACK]</router-link>
@@ -14,11 +16,13 @@
 <script>
 import axios from 'axios'
 import ArticleCommentList from '@/components/Article/ArticleCommentList'
+import CommentCreateForm from '@/components/Article/CommentCreateForm'
 
 export default {
   name: 'ArticleDetailView',
   components: {
     ArticleCommentList,
+    CommentCreateForm,
   },
   data() {
     return {

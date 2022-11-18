@@ -42,3 +42,12 @@ def update(request, pk):
     if serializer.is_valid(raise_exception=True):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['POST'])
+def comment_create(request,pk):
+    article = get_object_or_404(Article,pk=pk)
+    serializer =CommentSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save(user=request.user,article=article)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
