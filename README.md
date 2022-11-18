@@ -136,9 +136,9 @@ Article 상세 목록을 보기 위해 마찬가지로 axios 로 article detail 
 
 Movie Detail을 영화 이미지를 클릭 하였을 때  modal 창으로 띄우기 위해서 v-if문과 watch를 사용하여 showModal일 경우 router index에 있는 메타 필드에 shoModal 띄운다 
 
--> meta 필드 란? 네이게이션 가드처럼 url은 이동하지만 url로 뜨는 창은 막고 대신 모달창을 띄어주는 역할 같은데 맞는지 교수님한테 물어보기 !!!!!!!!!!!
-
 -> detail 60번 불러오는 문제가 있음 
+
+=> 이유 확인했다! showModal의 속성이 true가 될 때 모든 아이템들의 showModal이 true가 되어버려서 그랬던 것. 현재 보고 있는 아이템, 즉 params의 id와 일치하는 modal만 속성을 true로 바꿔주기로 조건을 추가해주자 해결되었다.
 
 회원 가입할 때 csrf token이없는데 postman에서는 안되는데 vue axios로 받아올 때는 받아옴 ? 왜그러지.. 
 
@@ -154,4 +154,18 @@ axios post로 url을 받아온 후 header를 작성하였고, mutations에 LOGOU
 게시글 수정 기능 구현 -> router link를 이용하여 수정하고 싶은 게시글에서 update 버튼을 클릭하면 articleCreateView.vue로 이동하게 구성함 
 -> 이후 axios로 django에 있는 update url을 호출하여 수정하고 싶은 게시글을 가져오고 , 그 게시글의 기존에 있던 정보들을 input 창에 띄우기 위해 v-model을 사용 
 
-게시판 디테일에서 게시글에 달린 댓글 보이도록 구현 
+게시판 디테일에서 게시글에 달린 댓글 보이도록 구현 => components를 구분해서 더 만들어줬다. 게시글 디테일에서 댓글 리스트 컴포넌트를 만들고 그 안에다가 article이 가진 comment_set을 그대로 넘겨준 다음 거기서 댓글 아이템 컴포넌트를 만들어 각각이 comment(in comments)를 갖게 하여 보여준다.
+
+username을 볼 수 있게 하기 위해 장고에서 serializer를 수정했다.
+
+
+
+이후 댓글 생성을 위해 댓글 생성 폼 컴포넌트를 만든 뒤 input 칸을 만들어주고 submit이벤트가 발생하면 새로고침을 막은 다음 actions의 댓글 생성 axios를 실행하게 한다. 이에 맞춰 장고에서도 댓글 생성이 가능하게 하는 url과 view 함수를 만들어준다.
+
+
+
+댓글 작성에는 성공!
+
+read_only_fields에 user와 article을 넣어주는 것도 잊지 말자.
+
+댓글 작성이 성공적으로 기능하면 article detail로 돌아가게 된다.
