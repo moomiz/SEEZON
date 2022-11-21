@@ -65,3 +65,26 @@ def comment_detail(request, article_pk, comment_pk):
     elif request.method == 'DELETE':
         comment.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def article_like(request,article_pk):
+    article = get_object_or_404(Article, pk=article_pk)
+    user = request.user
+    if article.like_users.filter(pk=user.pk).exists():
+        article.like_users.remove(user)
+    else:
+        article.like_users.add(user)
+    return Response(status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def comment_like(request,comment_pk):
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    user = request.user
+    if comment.like_users.filter(pk=user.pk).exists():
+        comment.like_users.remove(user)
+    else:
+        comment.like_users.add(user)
+    return Response(status=status.HTTP_200_OK)

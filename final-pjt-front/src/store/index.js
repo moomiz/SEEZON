@@ -11,6 +11,10 @@ export default new Vuex.Store({
   state: {
     token: null,
     username: null,
+    firstName: null,
+    lastName: null,
+    id: null,
+    isAdult: null,
   },
   getters: {
     isLogin(state) {
@@ -18,13 +22,22 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    SAVE_TOKEN(state, userdata) {
-      state.token = userdata.key
-      state.username = userdata.username
+    SAVE_TOKEN(state, payload) {
+      state.token = payload.token
+      state.username = payload.username
+      state.firstName = payload.firstName
+      state.lastName = payload.lastName
+      state.id = payload.id
+      state.isAdult = payload.isAdult
       router.push({ name: 'index' })
     },
     LOGOUT(state) {
       state.token = null
+      state.username = null
+      state.firstName = null
+      state.lastName = null
+      state.id = null
+      state.isAdult = null
     }
 
   },
@@ -40,10 +53,31 @@ export default new Vuex.Store({
       }).then((res) => {
         // console.log(res)
         const userdata = {
-          key: res.data.key,
+          token: res.data.key,
           username: payload.username
         }
-        context.commit('SAVE_TOKEN', userdata)
+        context.dispatch('recentUser', userdata)
+      }).catch((err)=>{
+        console.log(err)
+      })
+    },
+    recentUser(context, userdata) {
+      axios({
+        method:'get',
+        url: `${API_URL}/api/v3/${userdata.username}/`,
+        headers: {
+          Authorization: `Token ${userdata.token}`,
+        }
+      }).then((res)=>{
+        const payload = {
+          id: res.data.id,
+          firstName: res.data.first_name,
+          lastName: res.data.last_name,
+          isAdult: res.data.is_adult,
+          username: res.data.username,
+          token: userdata.token,
+        }
+        context.commit('SAVE_TOKEN', payload)
       }).catch((err)=>{
         console.log(err)
       })
@@ -77,10 +111,10 @@ export default new Vuex.Store({
         .then((res) => {
           // console.log(res)
           const userdata = {
-            key: res.data.key,
+            token: res.data.key,
             username: payload.username
           }
-          context.commit('SAVE_TOKEN', userdata)
+          context.dispatch('recentUser', userdata)
         })
     },
     withDrawal(context) {
@@ -112,6 +146,19 @@ export default new Vuex.Store({
       }).then((res)=>{
         console.log(res)
         router.push({ name: 'profile', params: { username: payload.username } })
+      }).catch((err)=>{
+        console.log(err)
+      })
+    },
+    userFollow(context, userId) {
+      axios({
+        method: 'post',
+        url: `${API_URL}/api/v3/like/${userId}/`,
+        headers: {
+          Authorization: `Token ${this.state.token}`,
+        }
+      }).then((res)=>{
+        console.log(res)
       }).catch((err)=>{
         console.log(err)
       })
@@ -152,10 +199,10 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
-    deleteArticle(context,payload) {
+    deleteArticle(context, payload) {
       axios({
         method: 'delete',
-        url:`${API_URL}/api/v2/articles/${payload}/`,
+        url: `${API_URL}/api/v2/articles/${payload}/`,
         headers: {
           Authorization: `Token ${this.state.token}`,
         },
@@ -164,6 +211,20 @@ export default new Vuex.Store({
       }).catch((err)=>{
         console.log(err)
       })
+    },
+    articleLike(context, articleId) {
+      axios({
+        method: 'post',
+        url: `${API_URL}/api/v2/articles/${articleId}/like/`,
+        headers: {
+          Authorization: `Token ${this.state.token}`,
+        },
+      }).then((res)=>{
+        console.log(res)
+      }).catch((err)=>{
+        console.log(err)
+      })
+
     },
     createComment(context, payload) {
       axios({

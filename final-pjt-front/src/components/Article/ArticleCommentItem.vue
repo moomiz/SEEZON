@@ -1,11 +1,14 @@
 <template>
   <div>
     <!-- {{ comment }} -->
+    {{ comment.like_users }}
     <span><router-link :to="{ name: 'profile', params: { username: comment?.username} }">{{ comment?.username }}</router-link></span>
     <span>: </span>
     <span>{{ comment?.content }}</span>
     <span><button @click="edit=!edit">edit</button></span>
-    <span><button @click="commentDelete">delete</button></span><br>
+    <span><button @click="commentDelete">delete</button></span>
+    <span><button v-if="!isIn" @click="commentLike">♥</button></span>
+    <button v-if="isIn" @click="commentLike">♡</button><br>
     <div v-if="edit">
       <form @submit.prevent="commentEdit">
         <label for="content">수정내용: </label>
@@ -27,6 +30,8 @@ export default {
     return {
       content: this.comment.content,
       edit: false,
+      isIn: null,
+      commentLikeUsers: null,
     }
   },
   methods: {
@@ -48,6 +53,15 @@ export default {
         articleId, commentId
       }
       this.$store.dispatch('commentDelete', payload)
+    },
+    commentLike() {
+      this.$store.dispatch('commentLike',this.comment.like_users)
+      if (this.isIn) {
+        this.commentLikeUsers -= 1
+      } else {
+        this.commentLikeUsers += 1
+      }
+      this.isIn = !this.isIn
     }
   }
 }

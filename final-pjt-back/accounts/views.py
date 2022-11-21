@@ -36,3 +36,16 @@ def user_update(request, username):
     if serializer.is_valid(raise_exception=True):
         serializer.save()
         return Response(serializer.data)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def following(request, user_pk):
+    person = get_object_or_404(get_user_model(), pk=user_pk)
+    user = request.user
+    if person != user:
+        if person.followers.filter(pk=user.pk).exists():
+            person.followers.remove(user)
+        else:
+            person.followers.add(user)
+        return Response(status=status.HTTP_200_OK)

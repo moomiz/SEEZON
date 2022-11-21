@@ -25,7 +25,7 @@ export default {
           content,
           id
         }
-        this.$store.dispatch('createComment',payload)
+        this.$store.dispatch('createComment', payload)
 
       }
     }
