@@ -4,8 +4,9 @@
       <router-link :to="{ name: 'index' }">Home</router-link> |
       <router-link v-if="!isLogin" :to="{ name: 'login' }">login</router-link>
       <router-link v-if="isLogin" :to="{ name: 'logout' }">logout</router-link> |
-      <router-link :to="{ name: 'article' }">article</router-link> | 
-      <router-link v-if="isLogin" :to="{ name: 'profile' }">profile</router-link> 
+      <router-link :to="{ name: 'article' }">article</router-link>
+      <span v-if="isLogin"> | </span>
+      <router-link v-if="isLogin" :to="{ name: 'profile', params: { username: recentUser } }">profile</router-link> 
     </nav>
     <router-view/>
   </div>
@@ -21,6 +22,9 @@ export default {
   computed: {
     isLogin() {
       return this.$store.getters.isLogin
+    },
+    recentUser() {
+      return this.$store.state.username
     }
   }
 }

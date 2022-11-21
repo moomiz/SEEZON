@@ -10,6 +10,7 @@ import ArticleUpdateView from '@/views/Article/ArticleUpdateView'
 import ArticleCreateView from '@/views/Article/ArticleCreateView'
 import LogoutView from '@/views/Account/LogoutView'
 import ProfileView from '@/views/Account/ProfileView'
+import ProfileUpdateView from '@/views/Account/ProfileUpdateView'
 
 Vue.use(VueRouter)
 
@@ -76,9 +77,14 @@ const routes = [
     component: ArticleUpdateView,
   },
   {
-    path: '/profile',
+    path: '/profile/:username',
     name: 'profile',
     component: ProfileView,
+  },
+  {
+    path: '/profile/:username/update',
+    name: 'profile-update',
+    component: ProfileUpdateView,
   }
 ]
 

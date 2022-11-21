@@ -10,6 +10,7 @@ const API_URL = 'http://127.0.0.1:8000'
 export default new Vuex.Store({
   state: {
     token: null,
+    username: null,
   },
   getters: {
     isLogin(state) {
@@ -17,8 +18,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    SAVE_TOKEN(state, token) {
-      state.token = token
+    SAVE_TOKEN(state, userdata) {
+      state.token = userdata.key
+      state.username = userdata.username
       router.push({ name: 'index' })
     },
     LOGOUT(state) {
@@ -37,7 +39,11 @@ export default new Vuex.Store({
         }
       }).then((res) => {
         // console.log(res)
-        context.commit('SAVE_TOKEN', res.data.key)
+        const userdata = {
+          key: res.data.key,
+          username: payload.username
+        }
+        context.commit('SAVE_TOKEN', userdata)
       }).catch((err)=>{
         console.log(err)
       })
@@ -70,7 +76,11 @@ export default new Vuex.Store({
       })
         .then((res) => {
           // console.log(res)
-          context.commit('SAVE_TOKEN', res.data.key)
+          const userdata = {
+            key: res.data.key,
+            username: payload.username
+          }
+          context.commit('SAVE_TOKEN', userdata)
         })
     },
     withDrawal(context) {
@@ -83,6 +93,25 @@ export default new Vuex.Store({
       }).then(()=>{
         router.push({ name:'index' })
         context.commit('LOGOUT')
+      }).catch((err)=>{
+        console.log(err)
+      })
+    },
+    userUpdate(context, payload) {
+      axios({
+        method: 'post',
+        url: `${API_URL}/api/v3/update/${payload.username}/`,
+        data: {
+          first_name: payload.firstName,
+          last_name: payload.lastName,
+          is_adult: payload.isAdult,
+        },
+        headers: {
+          Authorization: `Token ${this.state.token}`,
+        }
+      }).then((res)=>{
+        console.log(res)
+        router.push({ name: 'profile', params: { username: payload.username } })
       }).catch((err)=>{
         console.log(err)
       })
@@ -156,12 +185,28 @@ export default new Vuex.Store({
     commentDelete(context, payload) {
       axios({
         method: 'delete',
-        url:`${API_URL}/api/v2/articles/${payload.articleId}/comment/${payload.commentId}/`,
+        url: `${API_URL}/api/v2/articles/${payload.articleId}/comment/${payload.commentId}/`,
         headers: {
           Authorization: `Token ${this.state.token}`,
         }
       }).then(()=>{
-        router.push({ name: 'articledetail', params:{ id: payload.id }})
+        router.push({ name: 'articledetail', params:{ id: payload.articleId }})
+      }).catch((err)=>{
+        console.log(err)
+      })
+    },
+    commentEdit(context, payload) {
+      axios({
+        method: 'put',
+        url: `${API_URL}/api/v2/articles/${payload.articleId}/comment/${payload.commentId}/`,
+        data: {
+          content: payload.commentContent,
+        },
+        headers: {
+          Authorization: `Token ${this.state.token}`,
+        },
+      }).then(()=>{
+        router.push({ name: 'articledetail', params:{ id: payload.articleId }})
       }).catch((err)=>{
         console.log(err)
       })

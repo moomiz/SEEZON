@@ -3,4 +3,5 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class User(AbstractUser):
-    is_adult = models.BooleanField(null=True)
+    is_adult = models.BooleanField(default=False)
+    followings = models.ManyToManyField('self', symmetrical=False, related_name='followers')

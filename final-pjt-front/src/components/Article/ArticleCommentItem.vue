@@ -1,10 +1,18 @@
 <template>
   <div>
     <!-- {{ comment }} -->
-    <span>{{ comment?.username }}: </span>
+    <span><router-link :to="{ name: 'profile', params: { username: comment?.username} }">{{ comment?.username }}</router-link></span>
+    <span>: </span>
     <span>{{ comment?.content }}</span>
-    <span><button>edit</button></span>
-    <span><button @click="commentDelete">delete</button></span>
+    <span><button @click="edit=!edit">edit</button></span>
+    <span><button @click="commentDelete">delete</button></span><br>
+    <div v-if="edit">
+      <form @submit.prevent="commentEdit">
+        <label for="content">수정내용: </label>
+        <input type="text" id="content" v-model="content">
+        <input type="submit" value="Edit">
+      </form>
+    </div>
     
   </div>
 </template>
@@ -15,10 +23,23 @@ export default {
   props: {
     comment: Object,
   },
+  data() {
+    return {
+      content: this.comment.content,
+      edit: false,
+    }
+  },
   methods: {
-    // commentEdit() {
-    //   this.$store.dispatch('commentEdit',)
-    // },
+    commentEdit() {
+      const articleId = this.$route.params.id
+      const commentId = this.comment.id
+      const commentContent = this.content
+
+      const payload = {
+        articleId, commentId, commentContent,
+      }
+      this.$store.dispatch('commentEdit', payload)
+    },
     commentDelete() {
       const articleId = this.$route.params.id
       const commentId = this.comment.id

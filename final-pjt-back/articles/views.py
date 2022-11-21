@@ -18,7 +18,7 @@ def article_list(request):
     return Response(serializer.data)
 
 
-@api_view(['GET','PUT','DELETE'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def article_detail(request, pk):
     article = get_object_or_404(Article, pk=pk)
     if request.method == 'GET':
@@ -46,17 +46,22 @@ def create(request):
 @api_view(['POST'])
 def comment_create(request, pk):
     article = get_object_or_404(Article,pk=pk)
-    serializer =CommentSerializer(data=request.data)
+    serializer = CommentSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         serializer.save(user=request.user,article=article)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-@api_view(['PUT','DELETE','GET'])
+@api_view(['PUT', 'DELETE', 'GET'])
 @permission_classes([IsAuthenticated])
 def comment_detail(request, article_pk, comment_pk):
-    article = get_object_or_404(Article,pk=article_pk)
-    comment = get_object_or_404(Comment,pk=comment_pk)
-    if request.method == 'DELETE':
+    article = get_object_or_404(Article, pk=article_pk)
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    if request.method == 'PUT':
+        serializer = CommentSerializer(data=request.data, instance=comment)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+    elif request.method == 'DELETE':
         comment.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

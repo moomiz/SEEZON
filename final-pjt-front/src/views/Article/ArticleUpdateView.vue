@@ -46,6 +46,8 @@ export default {
         this.article = res.data
         this.title = res.data.title
         this.content = res.data.content
+      }).catch((err)=>{
+        console.log(err)
       })
 
   },
