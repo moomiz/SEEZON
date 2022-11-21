@@ -18,11 +18,20 @@ def article_list(request):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
+@api_view(['GET','PUT','DELETE'])
 def article_detail(request, pk):
     article = get_object_or_404(Article, pk=pk)
-    serializer = ArticleSerializer(article)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        serializer = ArticleSerializer(article)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = ArticleSerializer(data=request.data, instance=article)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+    elif request.method == 'DELETE':
+        article.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['POST'])
@@ -35,19 +44,19 @@ def create(request):
 
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def update(request, pk):
-    article = get_object_or_404(Article, pk=pk)
-    serializer = ArticleSerializer(data=request.data, instance=article)
-    if serializer.is_valid(raise_exception=True):
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-
-@api_view(['POST'])
-def comment_create(request,pk):
+def comment_create(request, pk):
     article = get_object_or_404(Article,pk=pk)
     serializer =CommentSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         serializer.save(user=request.user,article=article)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['PUT','DELETE','GET'])
+@permission_classes([IsAuthenticated])
+def comment_detail(request, article_pk, comment_pk):
+    article = get_object_or_404(Article,pk=article_pk)
+    comment = get_object_or_404(Comment,pk=comment_pk)
+    if request.method == 'DELETE':
+        comment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

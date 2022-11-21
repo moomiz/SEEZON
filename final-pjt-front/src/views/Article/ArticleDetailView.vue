@@ -4,10 +4,11 @@
     <h3>{{ article?.title }}</h3>
     <router-link :to="{ name: 'articleupdate' }" >[UPDATE]</router-link>
     <p>{{ article?.content }}</p>
+    <button @click="deleteArticle">[DELETE]</button>
     <hr>
     <CommentCreateForm />
     <hr>
-    <ArticleCommentList :comments=article.comment_set />
+    <ArticleCommentList :comments=article?.comment_set />
     <hr>
     <router-link to=".">[BACK]</router-link>
   </div>
@@ -41,6 +42,9 @@ export default {
         console.log(err)
       })
     },
+    deleteArticle() {
+      this.$store.dispatch('deleteArticle',this.$route.params.id)
+    }
   },
   created(){
     this.getArticleDetail()

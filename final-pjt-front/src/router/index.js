@@ -9,6 +9,7 @@ import ArticleDetailView from '@/views/Article/ArticleDetailView'
 import ArticleUpdateView from '@/views/Article/ArticleUpdateView'
 import ArticleCreateView from '@/views/Article/ArticleCreateView'
 import LogoutView from '@/views/Account/LogoutView'
+import ProfileView from '@/views/Account/ProfileView'
 
 Vue.use(VueRouter)
 
@@ -74,6 +75,11 @@ const routes = [
     name: 'articleupdate',
     component: ArticleUpdateView,
   },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: ProfileView,
+  }
 ]
 
 const router = new VueRouter({

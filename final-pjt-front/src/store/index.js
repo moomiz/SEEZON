@@ -73,6 +73,20 @@ export default new Vuex.Store({
           context.commit('SAVE_TOKEN', res.data.key)
         })
     },
+    withDrawal(context) {
+      axios({
+        method: 'delete',
+        url: `${API_URL}/api/v3/delete/`,
+        headers: {
+          Authorization: `Token ${this.state.token}`,
+        }
+      }).then(()=>{
+        router.push({ name:'index' })
+        context.commit('LOGOUT')
+      }).catch((err)=>{
+        console.log(err)
+      })
+    },
     createArticle(context, payload) {
       axios({
         method: 'post',
@@ -93,8 +107,8 @@ export default new Vuex.Store({
     },
     articleUpdate(context, payload) {
       axios({
-        method: 'post',
-        url: `${API_URL}/api/v2/articles/${payload.id}/update/`,
+        method: 'put',
+        url: `${API_URL}/api/v2/articles/${payload.id}/`,
         data: {
           title: payload.title,
           content: payload.content,
@@ -105,6 +119,19 @@ export default new Vuex.Store({
       }).then(()=>{ // res
         // context.commit('ARTICLE_UPDATE', res.data)
         router.push({ name: 'articledetail', params: { id: payload.id } })
+      }).catch((err)=>{
+        console.log(err)
+      })
+    },
+    deleteArticle(context,payload) {
+      axios({
+        method: 'delete',
+        url:`${API_URL}/api/v2/articles/${payload}/`,
+        headers: {
+          Authorization: `Token ${this.state.token}`,
+        },
+      }).then(()=>{
+        router.push(router.push({ name: 'article' }))
       }).catch((err)=>{
         console.log(err)
       })
@@ -125,7 +152,19 @@ export default new Vuex.Store({
       }).catch((err)=>{
         console.log(err)
       })
-
+    },
+    commentDelete(context, payload) {
+      axios({
+        method: 'delete',
+        url:`${API_URL}/api/v2/articles/${payload.articleId}/comment/${payload.commentId}/`,
+        headers: {
+          Authorization: `Token ${this.state.token}`,
+        }
+      }).then(()=>{
+        router.push({ name: 'articledetail', params:{ id: payload.id }})
+      }).catch((err)=>{
+        console.log(err)
+      })
     }
   },
   modules: {
