@@ -4,9 +4,11 @@
         :to="{ name: 'moviedetail', params: { id: movie.id } }">
       <img :src="`https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`" :alt="movie.title">
     </router-link>
-    <div id="`myModal-${movie.id}`" v-if="showModal" class="modal-route">
-      <div class="modal-content">
-        <router-view></router-view>
+    <div v-if="movie.id == this.$route.params.id">
+      <div v-if="showModal" class="modal-route" :key="movie.id">
+        <div class="modal-content">
+          <router-view></router-view>
+        </div>
       </div>
     </div>
   </div>
@@ -28,11 +30,23 @@ export default {
       }
     }
   },
+  methods: {
+    modalShow(){
+      // console.log(`#myModal-${this.$route.params.id}`)
+      // const myModal = document.getElementById(`myModal-${this.$route.params.id}`)
+      // console.log(myModal)
+      // myModal.showModal = true
+      this.showModal = true
+    },
+  },
   data() {
     return {
       showModal: false
     }
   },
+  mounted(){
+    this.modalShow()
+  }
 }
 </script>
 
@@ -46,7 +60,7 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  background: #00000005;
+  background: #00000000;
 }
 .modal-route .modal-content {
   width: 90%;
