@@ -1,19 +1,20 @@
 <template>
   <div>
-    <RecommendMovieList />
+    <RecommendMovie  />
     <MovieList/>
   </div>
 </template>
 
 <script>
 import MovieList from '@/components/Movie/MovieList'
-import RecommendMovieList from '@/components/Movie/RecommendMovieList.vue';
+import RecommendMovie from '@/components/Recommend/RecommendMovie.vue';
+
 
 export default {
   name: 'MoviesView',
   components: {
     MovieList,
-    RecommendMovieList
+    RecommendMovie
 
   }
 }
