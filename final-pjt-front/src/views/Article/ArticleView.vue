@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link :to="{ name: 'articlecreate' }">[CREATE]</router-link>
+    <router-link class="text-decoration-none" :to="{ name: 'articlecreate' }">[CREATE]</router-link>
     <hr>
     <ArticleList />
   </div>

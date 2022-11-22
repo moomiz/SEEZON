@@ -2,6 +2,7 @@
   <div>
     <h5>Review</h5>
     <hr>
+    <MovieReviewCreateForm />
     <MovieReviewItem
     v-for="review in reviews"
     :review="review"
@@ -11,6 +12,7 @@
 
 <script>
 import MovieReviewItem from '@/components/Movie/MovieReviewItem'
+import MovieReviewCreateForm from './MovieReviewCreateForm';
 export default {
   name: 'MovieReview',
   props: {
@@ -18,6 +20,7 @@ export default {
   },
   components: {
     MovieReviewItem,
+    MovieReviewCreateForm
   }
 }
 </script>

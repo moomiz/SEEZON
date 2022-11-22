@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="width: 100%; min-height: 100vh;">
     <form @submit.prevent="userUpdate">
       <label for="first-name">first name : </label>
       <input type="text" id="first-name" v-model="firstName">

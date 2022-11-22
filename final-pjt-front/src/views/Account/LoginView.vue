@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="width: 100vw; height: 100vh;">
     <h1>LogIn Page</h1>
     <form @submit.prevent="logIn">
       <label for="username">username : </label>

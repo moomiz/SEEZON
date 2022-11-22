@@ -1,14 +1,14 @@
 
 <template>
   <div>
-    <swiper :options="swiperOption" ref="mySwiper" class="swiper">
-      <RecommendMovieItem class="swiper-slide"
+    <swiper :options="swiperOption" ref="mySwiper" class="swiper py-5">
+      <RecommendMovieItem class="swiper-slide pb-5"
         v-for="movie in movies"
         :key="movie.id"
         :movie=movie
         />
-        <div class="swiper-button-prev swiper-btn-prev" slot="button-prev"></div>
-		<div class="swiper-button-next swiper-btn-next" slot="button-next"></div>
+        <div class="swiper-button-prev swiper-btn-prev" style="color:palevioletred" slot="button-prev"></div>
+		<div class="swiper-button-next swiper-btn-next" style="color:palevioletred" slot="button-next"></div>
     </swiper>
   </div>
 </template>

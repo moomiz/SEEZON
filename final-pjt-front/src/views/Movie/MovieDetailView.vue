@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="detail">
     <div class="title">
       <h3 class="m-3">{{ movie?.title }}</h3>
       <router-link to="../">[BACK]</router-link>
@@ -93,11 +93,15 @@ export default {
   right: 0;
   height: 75px;
   padding: 1rem;
-  color: rgb(0, 0, 0);
+  color:#2c3e50;
   background: rgb(255, 255, 255);
   font-weight: bold;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.detail {
+  color: #2c3e50;
 }
 </style>

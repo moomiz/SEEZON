@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="width: 100%; min-height: 100vh;">
     <p>{{ user?.username }}님의 프로필입니다.</p>
     <p>팔로워: {{ userFollowers }}</p>
     <p>팔로잉: {{ user?.followings.length }}</p>

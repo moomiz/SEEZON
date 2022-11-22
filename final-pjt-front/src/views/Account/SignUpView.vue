@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="width: 100vw; height: 100vh;">
     <form @submit.prevent="signUp">
       <label for="username">username : </label>
       <input type="text" id="username" v-model="username"><br>

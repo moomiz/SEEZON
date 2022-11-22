@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div style="width: 100%; min-height: 100vh;">
     <hr>
     <h3>{{ article?.title }}</h3>
     <span>{{ articleLikeUsers }}
     <!-- {{ article?.like_users }} -->
-    <button v-if="isIn" @click="articleLike">♥</button>
-    <button v-if="!isIn" @click="articleLike">♡</button></span>
+    <button v-if="isIn" @click="articleLike">❤</button>
+    <button v-if="!isIn" @click="articleLike">🤍</button></span>
     <br>
     <router-link :to="{ name: 'articleupdate' }" >[UPDATE]</router-link>
     <p>{{ article?.content }}</p>
