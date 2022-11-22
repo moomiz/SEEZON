@@ -52,16 +52,24 @@ export default {
       })
     },
     deleteArticle() {
-      this.$store.dispatch('deleteArticle', this.$route.params.id)
+      if (this.$store.getters.isLogin === true) {
+        this.$store.dispatch('deleteArticle', this.$route.params.id)
+      } else {
+        this.$router.push({ name: 'login' })
+      }
     },
     articleLike() {
-      this.$store.dispatch('articleLike', this.article.id)
-      if (this.isIn) {
-        this.articleLikeUsers -= 1
+      if (this.$store.getters.isLogin === true) {
+        this.$store.dispatch('articleLike', this.article.id)
+        if (this.isIn) {
+          this.articleLikeUsers -= 1
+        } else {
+          this.articleLikeUsers += 1
+        }
+        this.isIn = !this.isIn
       } else {
-        this.articleLikeUsers += 1
+        this.$router.push({ name: 'login' })
       }
-      this.isIn = !this.isIn
     },
     commetAdd() {
       this.getArticleDetail()

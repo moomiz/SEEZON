@@ -23,15 +23,24 @@ export default {
   },
   methods: {
     createArticle() {
-      const title = this.title
-      const content = this.content
+      if (this.$store.getters.isLogin === true) {
+        const title = this.title
+        const content = this.content
 
-      const payload = {
-        title,
-        content
+        const payload = {
+          title,
+          content
+        }
+
+        this.$store.dispatch('createArticle', payload)
+      } else {
+          this.$router.push({ name: 'login' })
       }
-
-      this.$store.dispatch('createArticle', payload)
+    },
+    beforeCreate(){
+      if (this.$store.getters.isLogin === false) {
+        this.$router.push({ name: 'login' })
+      }
     }
   }
 }

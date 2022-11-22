@@ -25,31 +25,39 @@ export default {
   },
   methods : {
     articleUpdate() {
-      const title = this.title
-      const content = this.content
-      const id = this.$route.params.id
+      if (this.$store.getters.isLogin === true) {
+        const title = this.title
+        const content = this.content
+        const id = this.$route.params.id
 
-      const payload = {
-        id,
-        title,
-        content,
+        const payload = {
+          id,
+          title,
+          content,
+        }
+
+        this.$store.dispatch('articleUpdate', payload)
+      } else {
+        this.$router.push({ name: 'login' })
       }
-
-      this.$store.dispatch('articleUpdate', payload)
     },
   },
   created(){
     axios({
-        method: 'get',
-        url: `http://127.0.0.1:8000/api/v2/articles/${this.$route.params.id}/`
-      }).then((res)=>{
-        this.article = res.data
-        this.title = res.data.title
-        this.content = res.data.content
-      }).catch((err)=>{
-        console.log(err)
-      })
-
+      method: 'get',
+      url: `http://127.0.0.1:8000/api/v2/articles/${this.$route.params.id}/`
+    }).then((res)=>{
+      this.article = res.data
+      this.title = res.data.title
+      this.content = res.data.content
+    }).catch((err)=>{
+      console.log(err)
+    })
+  },
+  beforeCreate(){
+    if (this.$store.getters.isLogin === false) {
+      this.$router.push({ name: 'login' })
+    }
   },
 }
 </script>

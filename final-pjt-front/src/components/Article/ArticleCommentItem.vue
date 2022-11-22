@@ -35,37 +35,49 @@ export default {
   },
   methods: {
     commentEdit() {
-      const articleId = this.$route.params.id
-      const commentId = this.comment.id
-      const commentContent = this.content
+      if (this.$store.getters.isLogin === true) {
+        const articleId = this.$route.params.id
+        const commentId = this.comment.id
+        const commentContent = this.content
 
-      const payload = {
-        articleId, commentId, commentContent,
+        const payload = {
+          articleId, commentId, commentContent,
+        }
+        this.$store.dispatch('commentEdit', payload)
+        this.edit = false
+        // console.log(this.$refs.edited)
+        this.$refs.edited.innerText = `${commentContent}`
+      } else {
+        this.$router.push({ name: 'login' })
       }
-      this.$store.dispatch('commentEdit', payload)
-      this.edit = false
-      // console.log(this.$refs.edited)
-      this.$refs.edited.innerText = `${commentContent}`
-    },
+    }, 
     commentDelete() {
-      const articleId = this.$route.params.id
-      const commentId = this.comment.id
+      if (this.$store.getters.isLogin === true) {
+        const articleId = this.$route.params.id
+        const commentId = this.comment.id
 
-      const payload = {
-        articleId, commentId
+        const payload = {
+          articleId, commentId
+        }
+        this.$store.dispatch('commentDelete', payload)
+        this.delete = true
+      } else {
+        this.$router.push({ name: 'login' })
       }
-      this.$store.dispatch('commentDelete', payload)
-      this.delete = true
     },
     commentLike() {
-      this.$store.dispatch('commentLike', this.comment.id)
-      if (this.isIn) {
-        this.commentLikeUsers -= 1
+      if (this.$store.getters.isLogin === true) {
+        this.$store.dispatch('commentLike', this.comment.id)
+        if (this.isIn) {
+          this.commentLikeUsers -= 1
+        } else {
+          this.commentLikeUsers += 1
+        }
+        this.isIn = !this.isIn
       } else {
-        this.commentLikeUsers += 1
+        this.$router.push({ name: 'login' })
       }
-      this.isIn = !this.isIn
-    }
+    },
   },
   created() {
     this.isIn = this.comment.like_users.includes(this.$store.state.id)

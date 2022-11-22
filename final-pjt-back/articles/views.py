@@ -25,13 +25,17 @@ def article_detail(request, pk):
         serializer = ArticleSerializer(article)
         return Response(serializer.data)
     elif request.method == 'PUT':
-        serializer = ArticleSerializer(data=request.data, instance=article)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        if request.user.is_authenticated():
+            serializer = ArticleSerializer(data=request.data, instance=article)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
-        article.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        if request.user.is_authenticated():
+            article.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
@@ -44,15 +48,16 @@ def create(request):
 
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def comment_create(request, pk):
-    article = get_object_or_404(Article,pk=pk)
+    article = get_object_or_404(Article, pk=pk)
     serializer = CommentSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        serializer.save(user=request.user,article=article)
+        serializer.save(user=request.user, article=article)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-@api_view(['PUT', 'DELETE', 'GET'])
+@api_view(['PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])
 def comment_detail(request, article_pk, comment_pk):
     article = get_object_or_404(Article, pk=article_pk)
@@ -65,6 +70,7 @@ def comment_detail(request, article_pk, comment_pk):
     elif request.method == 'DELETE':
         comment.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
