@@ -2,10 +2,11 @@
   <div>
     <hr>
     <h3>{{ article?.title }}</h3>
-    {{ articleLikeUsers }}
+    <span>{{ articleLikeUsers }}
     <!-- {{ article?.like_users }} -->
     <button v-if="isIn" @click="articleLike">♥</button>
-    <button v-if="!isIn" @click="articleLike">♡</button>
+    <button v-if="!isIn" @click="articleLike">♡</button></span>
+    <br>
     <router-link :to="{ name: 'articleupdate' }" >[UPDATE]</router-link>
     <p>{{ article?.content }}</p>
     <button @click="deleteArticle">[DELETE]</button>
@@ -55,7 +56,7 @@ export default {
       if (this.$store.getters.isLogin === true) {
         this.$store.dispatch('deleteArticle', this.$route.params.id)
       } else {
-        this.$router.push({ name: 'login' })
+        alert('로그인이 필요합니다!')
       }
     },
     articleLike() {
@@ -68,7 +69,7 @@ export default {
         }
         this.isIn = !this.isIn
       } else {
-        this.$router.push({ name: 'login' })
+        alert('로그인이 필요합니다!')
       }
     },
     commetAdd() {

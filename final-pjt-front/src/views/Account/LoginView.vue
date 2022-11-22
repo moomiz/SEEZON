@@ -33,7 +33,12 @@ export default {
       }
       this.$store.dispatch('logIn', payload)
     }
-  }
+  },
+  beforeCreate(){
+      if (this.$store.getters.isLogin === true) {
+        this.$router.push({ name: 'index' })
+      }
+  },
 }
 </script>
 

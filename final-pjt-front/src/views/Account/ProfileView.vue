@@ -21,14 +21,17 @@ export default {
       this.$store.dispatch('withDrawal')
     },
     userFollow() {
-      console.log(this.user.id)
-      this.$store.dispatch('userFollow', this.user.id)
-      if (this.isIn) {
-        this.userFollowers -= 1
+      if (this.$store.getters.isLogin === true) {
+        this.$store.dispatch('userFollow', this.user.id)
+        if (this.isIn) {
+          this.userFollowers -= 1
+        } else {
+          this.userFollowers += 1
+        }
+        this.isIn = !this.isIn
       } else {
-        this.userFollowers += 1
+        alert('로그인이 필요합니다!')
       }
-      this.isIn = !this.isIn
     },
   },
   data() {

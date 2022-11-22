@@ -29,7 +29,7 @@ export default new Vuex.Store({
       state.lastName = payload.lastName
       state.id = payload.id
       state.isAdult = payload.isAdult
-      router.push({ name: 'index' })
+      router.go(-1)
     },
     LOGOUT(state) {
       state.token = null

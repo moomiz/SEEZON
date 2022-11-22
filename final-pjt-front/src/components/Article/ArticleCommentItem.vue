@@ -5,9 +5,9 @@
     <span ref="edited">{{ comment?.content }}</span>
     <span><button @click="edit=!edit">edit</button></span>
     <span><button @click="commentDelete">delete</button></span>
-    <span><button v-if="!isIn" @click="commentLike">♡</button></span>
-    <button v-if="isIn" @click="commentLike">♥</button><br>
-    <span>{{ commentLikeUsers }}</span>
+    <span><button v-if="!isIn" @click="commentLike">♡</button>
+    <button v-if="isIn" @click="commentLike">♥</button>
+    {{ commentLikeUsers }}</span><br>
     <div v-if="edit">
       <form @submit.prevent="commentEdit">
         <label for="content">수정내용: </label>
@@ -48,7 +48,7 @@ export default {
         // console.log(this.$refs.edited)
         this.$refs.edited.innerText = `${commentContent}`
       } else {
-        this.$router.push({ name: 'login' })
+        alert('로그인이 필요합니다!')
       }
     }, 
     commentDelete() {
@@ -62,7 +62,7 @@ export default {
         this.$store.dispatch('commentDelete', payload)
         this.delete = true
       } else {
-        this.$router.push({ name: 'login' })
+        alert('로그인이 필요합니다!')
       }
     },
     commentLike() {
@@ -75,7 +75,7 @@ export default {
         }
         this.isIn = !this.isIn
       } else {
-        this.$router.push({ name: 'login' })
+        alert('로그인이 필요합니다!')
       }
     },
   },
