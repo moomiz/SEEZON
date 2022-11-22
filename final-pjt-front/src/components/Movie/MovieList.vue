@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div class="row">
       <MovieListItem
+        class="col-2"
         v-for="movie in movies"
         :key="movie.id"
         :movie=movie

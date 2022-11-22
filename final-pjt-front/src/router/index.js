@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+// import store from '@/store'
 import ArticleView from '@/views/Article/ArticleView'
 import MovieDetailView from '@/views/Movie/MovieDetailView'
 import LoginView from '@/views/Account/LoginView'

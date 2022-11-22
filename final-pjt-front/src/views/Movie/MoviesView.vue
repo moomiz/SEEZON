@@ -1,6 +1,7 @@
 <template>
   <div>
-    <RecommendMovie  />
+    <h3>오늘의 추천 영화</h3>
+    <RecommendMovie/>
     <MovieList/>
   </div>
 </template>

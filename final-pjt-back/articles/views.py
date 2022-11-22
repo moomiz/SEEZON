@@ -36,6 +36,13 @@ def article_detail(request, pk):
             article.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+    
+@api_view(['GET'])
+def movie_article(request, movie_pk):
+    article = get_list_or_404(Article, movie=movie_pk)
+    serializer = ArticleSerializer(article, many=True)
+    return Response(serializer.data)
 
 
 @api_view(['POST'])

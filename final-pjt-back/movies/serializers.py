@@ -9,6 +9,7 @@ class GenreSerializer(serializers.ModelSerializer):
 
 
 class ReviewSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username', read_only=True)
     class Meta:
         model = Review
         fields = '__all__'
@@ -17,7 +18,6 @@ class ReviewSerializer(serializers.ModelSerializer):
 class MovieSerializer(serializers.ModelSerializer):
     review_set = ReviewSerializer(many=True, read_only=True)
     genres = GenreSerializer(many=True, read_only=True)
-    articles = serializers.CharField(source='article_set.all', read_only=True)
     
     class Meta:
         model = Movie

@@ -51,6 +51,13 @@ def movie_review(request, movie_pk, review_pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
     
 
+@api_view(['GET'])
+def movie_review_list(request, movie_pk):
+    review = get_list_or_404(Review, movie=movie_pk)
+    serializer = ReviewSerializer(review, many=True)
+    return Response(serializer.data)
+
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def review_create(request, movie_pk):
