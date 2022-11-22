@@ -1,22 +1,20 @@
 <template>
-  <div>
-    <!-- {{ comment }} -->
-    {{ comment.like_users }}
+  <div v-if="!this.delete">
     <span><router-link :to="{ name: 'profile', params: { username: comment?.username} }">{{ comment?.username }}</router-link></span>
     <span>: </span>
-    <span>{{ comment?.content }}</span>
+    <span ref="edited">{{ comment?.content }}</span>
     <span><button @click="edit=!edit">edit</button></span>
     <span><button @click="commentDelete">delete</button></span>
-    <span><button v-if="!isIn" @click="commentLike">♥</button></span>
-    <button v-if="isIn" @click="commentLike">♡</button><br>
+    <span><button v-if="!isIn" @click="commentLike">♡</button></span>
+    <button v-if="isIn" @click="commentLike">♥</button><br>
+    <span>{{ commentLikeUsers }}</span>
     <div v-if="edit">
       <form @submit.prevent="commentEdit">
         <label for="content">수정내용: </label>
-        <input type="text" id="content" v-model="content">
+        <input type="text" id="content" v-model="content" @keyup.enter="commentEdit">
         <input type="submit" value="Edit">
       </form>
     </div>
-    
   </div>
 </template>
 
@@ -30,7 +28,8 @@ export default {
     return {
       content: this.comment.content,
       edit: false,
-      isIn: null,
+      isIn: false,
+      delete: false,
       commentLikeUsers: null,
     }
   },
@@ -44,6 +43,9 @@ export default {
         articleId, commentId, commentContent,
       }
       this.$store.dispatch('commentEdit', payload)
+      this.edit = false
+      // console.log(this.$refs.edited)
+      this.$refs.edited.innerText = `${commentContent}`
     },
     commentDelete() {
       const articleId = this.$route.params.id
@@ -53,9 +55,10 @@ export default {
         articleId, commentId
       }
       this.$store.dispatch('commentDelete', payload)
+      this.delete = true
     },
     commentLike() {
-      this.$store.dispatch('commentLike',this.comment.like_users)
+      this.$store.dispatch('commentLike', this.comment.id)
       if (this.isIn) {
         this.commentLikeUsers -= 1
       } else {
@@ -63,6 +66,10 @@ export default {
       }
       this.isIn = !this.isIn
     }
+  },
+  created() {
+    this.isIn = this.comment.like_users.includes(this.$store.state.id)
+    this.commentLikeUsers = this.comment.like_users.length
   }
 }
 </script>

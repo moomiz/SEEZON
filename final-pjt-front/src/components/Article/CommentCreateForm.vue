@@ -10,25 +10,36 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-    name: 'CommentCreateForm',
-    data() {
-      return {
-        content:null
-      }
-    },
-    methods: {
-      createComment() {
-        const content = this.content
-        const id = this.$route.params.id
-        const payload = {
-          content,
-          id
-        }
-        this.$store.dispatch('createComment', payload)
-
-      }
+  name: 'CommentCreateForm',
+  data() {
+    return {
+      content: null,
     }
+  },
+  methods: {
+    createComment() {
+      const content = this.content
+      const id = this.$route.params.id
+      axios({
+        method: 'post',
+        url: `http://127.0.0.1:8000/api/v2/articles/${id}/comment/create/`,
+        data: {
+          content: content,
+        },
+        headers: {
+          Authorization: `Token ${this.$store.state.token}`,
+        }
+      }).then(()=>{  // res
+        // context.commit('CREATE_ARTICLE', res.data)
+        // router.push({ name: 'articledetail', params:{ id: payload.id }})
+        this.$emit('new-comment')
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }
+  }
 }
 </script>
 

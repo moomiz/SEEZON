@@ -226,23 +226,6 @@ export default new Vuex.Store({
       })
 
     },
-    createComment(context, payload) {
-      axios({
-        method: 'post',
-        url: `${API_URL}/api/v2/articles/${payload.id}/comment/create/`,
-        data: {
-          content: payload.content,
-        },
-        headers: {
-          Authorization: `Token ${this.state.token}`,
-        }
-      }).then(()=>{  // res
-        // context.commit('CREATE_ARTICLE', res.data)
-        router.push({ name: 'articledetail', params:{ id: payload.id }})
-      }).catch((err)=>{
-        console.log(err)
-      })
-    },
     commentDelete(context, payload) {
       axios({
         method: 'delete',
@@ -251,7 +234,7 @@ export default new Vuex.Store({
           Authorization: `Token ${this.state.token}`,
         }
       }).then(()=>{
-        router.push({ name: 'articledetail', params:{ id: payload.articleId }})
+        // router.push({ name: 'articledetail', params:{ id: payload.articleId }})
       }).catch((err)=>{
         console.log(err)
       })
@@ -267,7 +250,20 @@ export default new Vuex.Store({
           Authorization: `Token ${this.state.token}`,
         },
       }).then(()=>{
-        router.push({ name: 'articledetail', params:{ id: payload.articleId }})
+        // router.go(router.currentRoute)
+      }).catch((err)=>{
+        console.log(err)
+      })
+    },
+    commentLike(context, commentId) {
+      axios({
+        method: 'post',
+        url: `${API_URL}/api/v2/articles/comment/like/${commentId}/`,
+        headers: {
+          Authorization: `Token ${this.state.token}`,
+        },
+      }).then((res)=>{
+        console.log(res)
       }).catch((err)=>{
         console.log(err)
       })

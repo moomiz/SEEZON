@@ -3,14 +3,15 @@
     <hr>
     <h3>{{ article?.title }}</h3>
     {{ articleLikeUsers }}
-    {{ article?.like_users }}
+    <!-- {{ article?.like_users }} -->
     <button v-if="isIn" @click="articleLike">♥</button>
     <button v-if="!isIn" @click="articleLike">♡</button>
     <router-link :to="{ name: 'articleupdate' }" >[UPDATE]</router-link>
     <p>{{ article?.content }}</p>
     <button @click="deleteArticle">[DELETE]</button>
     <hr>
-    <CommentCreateForm />
+    <CommentCreateForm 
+    @new-comment="commetAdd" />
     <hr>
     <ArticleCommentList :comments=article?.comment_set />
     <hr>
@@ -33,7 +34,7 @@ export default {
     return {
       article: null,
       isIn: null,
-      articleLikeUsers: null,
+      articleLikeUsers: 0,
     }
   },
   methods: {
@@ -61,6 +62,9 @@ export default {
         this.articleLikeUsers += 1
       }
       this.isIn = !this.isIn
+    },
+    commetAdd() {
+      this.getArticleDetail()
     }
   },
   created(){
