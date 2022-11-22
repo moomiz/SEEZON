@@ -40,7 +40,7 @@ export default {
     getMovieDetail() {
       axios({
         method: 'get',
-        url: `http://127.0.0.1:8000/api/v1/movies/${this.$route.params.id}/`
+        url: `http://127.0.0.1:8000/api/v1/movies/${this.$route.params.id}/`,
       }).then((res)=>{
         this.movie = res.data
       })
