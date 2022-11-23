@@ -12,6 +12,7 @@ import ArticleCreateView from '@/views/Article/ArticleCreateView'
 import LogoutView from '@/views/Account/LogoutView'
 import ProfileView from '@/views/Account/ProfileView'
 import ProfileUpdateView from '@/views/Account/ProfileUpdateView'
+import MovieDetailPageView from '@/views/Movie/MovieDetailPageView'
 
 Vue.use(VueRouter)
 
@@ -31,6 +32,11 @@ const routes = [
         }
       }
     ]
+  },
+  {
+    path:'/movie/page/:id',
+    name:'moviedetailpage',
+    component:MovieDetailPageView
   },
   // {
   //   path: '/movie/:id',

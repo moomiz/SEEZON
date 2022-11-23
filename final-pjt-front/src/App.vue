@@ -8,17 +8,14 @@
       <span v-if="isLogin"> | </span>
       <router-link v-if="isLogin" :to="{ name: 'profile', params: { username: recentUser } }">profile</router-link> 
     </nav>
-    <!-- <MovieSearchBar/> -->
     <router-view/>
   </div>
 </template>
 
 <script>
-// import MovieSearchBar from '@/components/Movie/MovieSearchBar'
 export default {
   name: 'App',
   components : {
-    // MovieSearchBar
   },
   data() {
     return {
