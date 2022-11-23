@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="width: 100%; min-height: 100vh;">
     <form @submit.prevent="articleUpdate">
       <label for="title">title : </label>
       <input type="text" id="title" v-model="title"><br>
@@ -26,17 +26,22 @@ export default {
   methods : {
     articleUpdate() {
       if (this.$store.getters.isLogin === true) {
-        const title = this.title
-        const content = this.content
-        const id = this.$route.params.id
+        if (this.$store.state.username === this.article.username) {
+          const title = this.title
+          const content = this.content
+          const id = this.$route.params.id
 
-        const payload = {
-          id,
-          title,
-          content,
+          const payload = {
+            id,
+            title,
+            content,
+          }
+
+          this.$store.dispatch('articleUpdate', payload)
+        } else {
+            alert(`${this.$store.state.username}님의 글이 아닙니다!`)
+            this.$router.push({ name: 'articledetail', params: { id: this.article.id }})
         }
-
-        this.$store.dispatch('articleUpdate', payload)
       } else {
         this.$router.push({ name: 'login' })
       }

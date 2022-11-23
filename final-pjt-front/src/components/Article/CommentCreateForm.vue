@@ -36,6 +36,7 @@ export default {
           // context.commit('CREATE_ARTICLE', res.data)
           // router.push({ name: 'articledetail', params:{ id: payload.id }})
           this.$emit('new-comment')
+          this.content = null
         }).catch((err)=>{
           console.log(err)
         })

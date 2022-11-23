@@ -25,14 +25,14 @@ def article_detail(request, pk):
         serializer = ArticleSerializer(article)
         return Response(serializer.data)
     elif request.method == 'PUT':
-        if request.user.is_authenticated():
+        if request.user == article.user:
             serializer = ArticleSerializer(data=request.data, instance=article)
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
-        if request.user.is_authenticated():
+        if request.user == article.user:
             article.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -70,13 +70,15 @@ def comment_detail(request, article_pk, comment_pk):
     article = get_object_or_404(Article, pk=article_pk)
     comment = get_object_or_404(Comment, pk=comment_pk)
     if request.method == 'PUT':
-        serializer = CommentSerializer(data=request.data, instance=comment)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        if request.user == comment.user:
+            serializer = CommentSerializer(data=request.data, instance=comment)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
     elif request.method == 'DELETE':
-        comment.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        if request.user == comment.user:
+            comment.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['POST'])

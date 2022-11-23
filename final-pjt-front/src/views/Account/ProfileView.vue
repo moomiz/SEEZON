@@ -1,10 +1,10 @@
 <template>
   <div style="width: 100%; min-height: 100vh;">
     <p>{{ user?.username }}님의 프로필입니다.</p>
+    <button class="follow" v-if="!isIn" @click="userFollow" >follow</button>
+    <button class="follow" v-if="isIn" @click="userFollow" >unfollow</button>
     <p>팔로워: {{ userFollowers }}</p>
     <p>팔로잉: {{ user?.followings.length }}</p>
-    <button v-if="!isIn" @click="userFollow" >follow</button>
-    <button v-if="isIn" @click="userFollow" >unfollow</button>
     <p>first name : {{ user?.firstName }}</p>
     <p>last name : {{ user?.lastName }}</p>
     <button v-if="user?.username === recentUser" @click="withDrawal" >회원탈퇴</button>
@@ -60,5 +60,11 @@ export default {
 </script>
 
 <style>
-
+.follow {
+  border: 1px solid rgb(255, 25, 94);
+  background-color: rgba(255, 255, 255, 0);
+  color: rgb(255, 25, 94);
+  border-radius: 10%;
+  margin-bottom: 1%;
+}
 </style>

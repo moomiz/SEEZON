@@ -1,22 +1,25 @@
 <template>
-  <div style="width: 100%; min-height: 100vh;">
-    <hr>
-    <h3>{{ article?.title }}</h3>
-    <span>{{ articleLikeUsers }}
-    <!-- {{ article?.like_users }} -->
-    <button v-if="isIn" @click="articleLike">❤</button>
-    <button v-if="!isIn" @click="articleLike">🤍</button></span>
-    <br>
-    <router-link :to="{ name: 'articleupdate' }" >[UPDATE]</router-link>
-    <p>{{ article?.content }}</p>
-    <button @click="deleteArticle">[DELETE]</button>
-    <hr>
-    <CommentCreateForm 
-    @new-comment="commetAdd" />
-    <hr>
-    <ArticleCommentList :comments=article?.comment_set />
-    <hr>
-    <router-link to=".">[BACK]</router-link>
+  <div class="d-flex justify-content-center" style="width: 100%; min-height: 100vh;">
+    <div class="w-75">
+      <hr>
+      <h3>{{ article?.title }}</h3>
+      <span>{{ articleLikeUsers }}</span>
+      <!-- {{ article?.like_users }} -->
+      <span v-if="isIn" @click="articleLike">💖</span>
+      <span v-if="!isIn" @click="articleLike">🤍</span>
+      <br>
+      <div class="justify-content-between">
+        <router-link :to="{ name: 'articleupdate' }" >[UPDATE]</router-link>
+        <a href="#" @click="deleteArticle">[DELETE]</a>
+      </div>
+      <p>{{ article?.content }}</p>
+      <hr>
+      <CommentCreateForm 
+      @new-comment="commetAdd" />
+      <hr>
+      <ArticleCommentList :comments=article?.comment_set />
+      <router-link to=".">[BACK]</router-link>
+    </div>
   </div>
 </template>
 
@@ -54,7 +57,11 @@ export default {
     },
     deleteArticle() {
       if (this.$store.getters.isLogin === true) {
-        this.$store.dispatch('deleteArticle', this.$route.params.id)
+        if (this.$store.state.username === this.article.username) {
+          this.$store.dispatch('deleteArticle', this.$route.params.id)
+        } else {
+          alert(`${this.$store.state.username}님의 글이 아닙니다!`)
+        }
       } else {
         alert('로그인이 필요합니다!')
       }
