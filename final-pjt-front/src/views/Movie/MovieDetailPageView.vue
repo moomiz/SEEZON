@@ -18,7 +18,7 @@
     />
     <hr>
     <MovieArticle :articles=articles />
-    <router-link :to="{ name: 'movierelatedarticle', params: { id: movie.id } }">[NEW ARTICLE]</router-link>
+    <router-link :to="{ name: 'movierelatedarticle', params: { id: movie?.id } }">[NEW ARTICLE]</router-link>
     <!-- {{ reviews }} -->
     <!-- <div class="movie-info">
       <p>{{ movie?.title }}</p>

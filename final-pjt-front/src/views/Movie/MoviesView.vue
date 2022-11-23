@@ -2,6 +2,7 @@
   <div>
     <MovieSearchBar/>
     <div>
+      <!-- {{  }} -->
       <h3>오늘의 추천 영화</h3>
       <RecommendMovie
       :movies=todayRecommend />
@@ -25,6 +26,7 @@ import MovieList from '@/components/Movie/MovieList'
 import RecommendMovie from '@/components/Recommend/RecommendMovie';
 import MovieSearchBar from '@/components/Movie/MovieSearchBar';
 import axios from 'axios';
+import _ from 'lodash'
 
 export default {
   name: 'MoviesView',
@@ -44,9 +46,9 @@ export default {
     todayRecommendMovies() {
       axios({
         method: 'get',
-        url: 'http://127.0.0.1:8000/api/v1/movies/',
+        url: 'http://127.0.0.1:8000/api/v1/movies/recommend/',
       }).then((res)=>{
-        this.todayRecommend = res.data
+        this.todayRecommend = _.orderBy(res.data, 'like_users', 'articles', )
       }).catch((err)=>{
         console.log(err)
       })

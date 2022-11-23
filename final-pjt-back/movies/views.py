@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from django.shortcuts import get_list_or_404, get_object_or_404
 from .serializers import MovieSerializer, GenreSerializer, ReviewSerializer
+from django.db.models import Count
 from .models import Genre, Movie, Review
 
 # Create your views here.
@@ -80,19 +81,14 @@ def review_like(request, pk):
     return Response(status=status.HTTP_200_OK)
 
 
-# @api_view(['POST'])
-# @permission_classes([IsAuthenticated])
-# def genre_like(request, genre_pk):
-#     genre = get_object_or_404(Genre, pk=genre_pk)
-#     user = request.user
-#     genre.like_users.add(user)
-#     return Response(status=status.HTTP_200_OK)
-
-
-# @api_view(['POST'])
-# @permission_classes([IsAuthenticated])
-# def genre_unlike(request, genre_pk):
-#     genre = get_object_or_404(Genre, pk=genre_pk)
-#     user = request.user
-#     genre.like_users.remove(user, 1)
-#     return Response(status=status.HTTP_200_OK)
+@api_view(['GET'])
+def recommend_movie_list(request):
+    movies = get_list_or_404(Movie.objects.distinct(), article__movie_id__isnull=False)
+    # movies.sort(key=lambda movie:movie.article_set.all()[len(movie)-1].created_at)
+    # for movie in movies:
+    #     print(movie.article_set.all())
+    #     for article in movie.article_set.all():
+    #         print(article.created_at)
+    # movies.sort()
+    serializer = MovieSerializer(movies, many=True)
+    return Response(serializer.data)
