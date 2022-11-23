@@ -92,3 +92,17 @@ def recommend_movie_list(request):
     # movies.sort()
     serializer = MovieSerializer(movies, many=True)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def today_recommend_movie_list(request):
+    movies = get_list_or_404(Movie.objects.distinct(), like_users__isnull=False)
+    serializer = MovieSerializer(movies, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def nobody_recommend_movie_list(request):
+    movies = get_list_or_404(Movie.objects.order_by('?'), like_users__isnull=True)[:30]
+    serializer = MovieSerializer(movies, many=True)
+    return Response(serializer.data)

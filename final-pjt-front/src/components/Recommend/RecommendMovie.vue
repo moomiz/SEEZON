@@ -3,7 +3,7 @@
     <swiper :options="swiperOption" ref="mySwiper" class="swiper py-5">
       <RecommendMovieItem class="swiper-slide pb-5"
         v-for="movie in movies"
-        :key="movie?.id"
+        :key="movie.id"
         :movie=movie
         />
         <div class="swiper-button-prev swiper-btn-prev" style="color:palevioletred" slot="button-prev"></div>
@@ -34,9 +34,9 @@ export default {
       swiperOption: { 
         notNextTick: true,
         spaceBetween: 6,
-        loop: true,
-        loopedSlides: 1,
-        initialSlide: 0,
+        // loop: true,
+        loopedSlides: -1,
+        initialSlide: -1,
         speed: 500,
         direction: "horizontal",
         grabCursor: true,

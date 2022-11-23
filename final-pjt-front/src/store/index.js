@@ -15,6 +15,7 @@ export default new Vuex.Store({
     lastName: null,
     id: null,
     isAdult: null,
+    like_genre: []
   },
   getters: {
     isLogin(state) {
@@ -29,7 +30,25 @@ export default new Vuex.Store({
       state.lastName = payload.lastName
       state.id = payload.id
       state.isAdult = payload.isAdult
+      const genres = []
+      payload.genres.forEach((genre) => {
+        genres.push(genre.id)
+      });
+      state.like_genre = genres
       router.go(-1)
+    },
+    SAVE_MOVIE(state, payload) {
+      state.token = payload.token
+      state.username = payload.username
+      state.firstName = payload.firstName
+      state.lastName = payload.lastName
+      state.id = payload.id
+      state.isAdult = payload.isAdult
+      const genres = []
+      payload.genres.forEach((genre) => {
+        genres.push(genre.id)
+      });
+      state.like_genre = genres
     },
     LOGOUT(state) {
       state.token = null
@@ -38,8 +57,8 @@ export default new Vuex.Store({
       state.lastName = null
       state.id = null
       state.isAdult = null
-    }
-
+      state.like_genre = []
+    },
   },
   actions: {
     logIn(context, payload) {
@@ -76,8 +95,31 @@ export default new Vuex.Store({
           isAdult: res.data.is_adult,
           username: res.data.username,
           token: userdata.token,
+          genres: res.data.like_movies[res.data.like_movies.length - 1].genres
         }
         context.commit('SAVE_TOKEN', payload)
+      }).catch((err)=>{
+        console.log(err)
+      })
+    },
+    lastMovie(context, userdata) {
+      axios({
+        method:'get',
+        url: `${API_URL}/api/v3/${userdata.username}/`,
+        headers: {
+          Authorization: `Token ${userdata.token}`,
+        }
+      }).then((res)=>{
+        const payload = {
+          id: res.data.id,
+          firstName: res.data.first_name,
+          lastName: res.data.last_name,
+          isAdult: res.data.is_adult,
+          username: res.data.username,
+          token: userdata.token,
+          genres: res.data.like_movies[res.data.like_movies.length - 1].genres
+        }
+        context.commit('SAVE_MOVIE', payload)
       }).catch((err)=>{
         console.log(err)
       })
@@ -324,10 +366,18 @@ export default new Vuex.Store({
           Authorization: `Token ${this.state.token}`,
         },
       }).then((res)=>{
+        context.dispatch('stateMovie')
         console.log(res)
       }).catch((err)=>{
         console.log(err)
       })
+    },
+    stateMovie(context) {
+      const userdata = {
+        token: context.state.token,
+        username: context.state.username
+      }
+      context.dispatch('lastMovie', userdata)
     }
   },
   modules: {

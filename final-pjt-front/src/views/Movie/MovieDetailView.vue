@@ -12,14 +12,14 @@
     <div>
       <img :src="`https://www.themoviedb.org/t/p/w500/${movie?.poster_path}`" :alt="movie?.title">
       <p>{{ movie?.overview }}</p>
-      <p v-for="genre in movie.genres" :key="genre.id">{{ genre.name }}</p>
+      <p v-for="genre in movie?.genres" :key="genre?.id">{{ genre?.name }}</p>
     </div>
     <MovieReview :reviews=reviews 
       @new-review="reviewAdd"
     />
     <hr>
     <MovieArticle :articles=articles />
-    <router-link :to="{ name: 'movierelatedarticle', params: { id: movie.id } }">[NEW ARTICLE]</router-link>
+    <router-link :to="{ name: 'movierelatedarticle', params: { id: movie?.id } }">[NEW ARTICLE]</router-link>
     <!-- {{ reviews }} -->
     <!-- <div class="movie-info">
       <p>{{ movie?.title }}</p>
@@ -97,7 +97,7 @@ export default {
     },
     movieLike() {
       if (this.$store.getters.isLogin === true) {
-        this.$store.dispatch('movieLike', this.movie.id)
+        this.$store.dispatch('movieLike', this.movie?.id)
         if (this.isIn) {
           this.movieLikeUsers -= 1
         } else {
