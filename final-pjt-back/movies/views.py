@@ -78,3 +78,21 @@ def review_like(request, pk):
     else:
         review.like_users.add(user)
     return Response(status=status.HTTP_200_OK)
+
+
+# @api_view(['POST'])
+# @permission_classes([IsAuthenticated])
+# def genre_like(request, genre_pk):
+#     genre = get_object_or_404(Genre, pk=genre_pk)
+#     user = request.user
+#     genre.like_users.add(user)
+#     return Response(status=status.HTTP_200_OK)
+
+
+# @api_view(['POST'])
+# @permission_classes([IsAuthenticated])
+# def genre_unlike(request, genre_pk):
+#     genre = get_object_or_404(Genre, pk=genre_pk)
+#     user = request.user
+#     genre.like_users.remove(user, 1)
+#     return Response(status=status.HTTP_200_OK)

@@ -3,7 +3,7 @@
     <swiper :options="swiperOption" ref="mySwiper" class="swiper py-5">
       <RecommendMovieItem class="swiper-slide pb-5"
         v-for="movie in movies"
-        :key="movie.id"
+        :key="movie?.id"
         :movie=movie
         />
         <div class="swiper-button-prev swiper-btn-prev" style="color:palevioletred" slot="button-prev"></div>
@@ -14,7 +14,6 @@
 
 <script>
 import RecommendMovieItem from '@/components/Recommend/RecommendMovieItem'
-import axios from 'axios'
 import { Swiper } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 
@@ -25,10 +24,12 @@ export default {
     RecommendMovieItem,
     Swiper
   },
+  props: {
+    movies: Array,
+  },
   data(){
     const that = this;
     return{
-      movies: null,
       imgIndex: 5,
       swiperOption: { 
         notNextTick: true,
@@ -70,16 +71,6 @@ export default {
       },       
     }
   },
-  created() {
-    axios({
-        method: 'get',
-        url:'http://127.0.0.1:8000/api/v1/movies/'
-    })
-    .then((res)=>{
-        this.movies = res.data
-        console.log(res)
-    })
- },
 computed: {
     swiper() {
       return this.$refs.mySwiper.swiper;

@@ -108,6 +108,20 @@ export default {
         alert('로그인이 필요합니다!')
       }
     },
+    // genreLike() {
+    //   this.movie.genres.map((genre)=>{
+    //     axios({
+          
+    //     })
+    //   })
+    // },
+    // genreUnLike() {
+    //   this.movie.genres.map((genre)=>{
+    //     axios({
+          
+    //     })
+    //   })
+    // },
   },
   created(){
     this.getMovieDetail()

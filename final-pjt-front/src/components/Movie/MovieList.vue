@@ -32,6 +32,7 @@ export default {
     })
     .then((res)=>{
         this.movies = res.data
+        // this.$emit('movies', this.movies)
         console.log(res)
     })
  },
