@@ -1,6 +1,5 @@
 <template>
   <div>
-    <MovieSearchBar/>
     <div>
       <!-- {{  }} -->
       <h3>오늘의 추천 영화</h3>
@@ -29,7 +28,6 @@
 <script>
 import MovieList from '@/components/Movie/MovieList'
 import RecommendMovie from '@/components/Recommend/RecommendMovie';
-import MovieSearchBar from '@/components/Movie/MovieSearchBar';
 import axios from 'axios';
 import _ from 'lodash'
 
@@ -46,7 +44,6 @@ export default {
   components: {
     MovieList,
     RecommendMovie, 
-    MovieSearchBar,
   },
   methods: {
     todayRecommendMovies() {
