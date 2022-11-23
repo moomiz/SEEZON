@@ -1,12 +1,14 @@
 <template>
   <div style="width: 100%; min-height: 100vh;">
     <p>{{ user?.username }}님의 프로필입니다.</p>
-    <button class="follow" v-if="!isIn" @click="userFollow" >follow</button>
-    <button class="follow" v-if="isIn" @click="userFollow" >unfollow</button>
+    <div v-if="user?.username!==recentUser">
+      <button class="follow" v-if="!isIn" @click="userFollow" >follow</button>
+      <button class="follow" v-if="isIn" @click="userFollow" >unfollow</button>
+    </div>
     <p>팔로워: {{ userFollowers }}</p>
     <p>팔로잉: {{ user?.followings.length }}</p>
-    <p>first name : {{ user?.firstName }}</p>
-    <p>last name : {{ user?.lastName }}</p>
+    <p>first name : {{ user?.first_name }}</p>
+    <p>last name : {{ user?.last_name }}</p>
     <button v-if="user?.username === recentUser" @click="withDrawal" >회원탈퇴</button>
     <router-link :to="{ name: 'profile-update', params: { username: recentUser }}" v-if="user?.username === recentUser">회원 정보 수정</router-link>
   </div>
@@ -33,6 +35,16 @@ export default {
         alert('로그인이 필요합니다!')
       }
     },
+    getUsers() {
+      axios({
+        method: 'get',
+        url: `http://127.0.0.1:8000/api/v3/${this.$route.params.username}/`,
+      }).then((res)=>{
+        this.user = res.data
+        this.isIn = this.user.followers.includes(this.$store.state.id)
+        this.userFollowers = this.user.followers.length
+      })
+    }
   },
   data() {
     return {
@@ -42,20 +54,21 @@ export default {
     }
   },
   created() {
-    axios({
-      method: 'get',
-      url: `http://127.0.0.1:8000/api/v3/${this.$route.params.username}/`,
-    }).then((res)=>{
-      this.user = res.data
-      this.isIn = this.user.followers.includes(this.$store.state.id)
-      this.userFollowers = this.user.followers.length
-    })
+    this.getUsers()
   },
   computed: {
     recentUser() {
       return this.$store.state.username
     }
   },
+  watch: {
+    $route: {
+      immediate: true,
+      handler: function() {
+        this.getUsers()
+      }
+    }
+  }, 
 }
 </script>
 

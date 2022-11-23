@@ -132,6 +132,7 @@ export default new Vuex.Store({
       })
     },
     userUpdate(context, payload) {
+      console.log(payload.username, ',,,')
       axios({
         method: 'post',
         url: `${API_URL}/api/v3/update/${payload.username}/`,
@@ -177,6 +178,24 @@ export default new Vuex.Store({
       }).then(()=>{  // res
         // context.commit('CREATE_ARTICLE', res.data)
         router.push({ name: 'article' })
+      }).catch((err)=>{
+        console.log(err)
+      })
+    },
+    createMovieArticle(context, payload) {
+      axios({
+        method: 'post',
+        url: `${API_URL}/api/v2/articles/${payload.movie}/create/`,
+        data: {
+          title: payload.title,
+          content: payload.content,
+        },
+        headers: {
+          Authorization: `Token ${this.state.token}`,
+        }
+      }).then(()=>{  // res
+        // context.commit('CREATE_ARTICLE', res.data)
+        router.push({ name: 'moviedetail', params: {id: payload.movie } })
       }).catch((err)=>{
         console.log(err)
       })
@@ -297,6 +316,19 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
+    movieLike(context, movidID) {
+      axios({
+        method: 'post',
+        url: `${API_URL}/api/v1/movies/${movidID}/like/`,
+        headers: {
+          Authorization: `Token ${this.state.token}`,
+        },
+      }).then((res)=>{
+        console.log(res)
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }
   },
   modules: {
   }

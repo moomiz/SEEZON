@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       article: null,
-      isIn: null,
+      isIn: false,
       articleLikeUsers: 0,
     }
   },

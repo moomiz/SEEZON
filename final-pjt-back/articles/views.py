@@ -52,6 +52,15 @@ def create(request):
     if serializer.is_valid(raise_exception=True):
         serializer.save(user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+    
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def movie_article_create(request, movie_pk):
+    serializer = ArticleSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save(user=request.user, movie_id=movie_pk)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 @api_view(['POST'])

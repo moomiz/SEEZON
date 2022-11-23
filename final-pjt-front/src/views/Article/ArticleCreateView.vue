@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="width: 100%; min-height: 100vh;">
     <form @submit.prevent="createArticle">
       <label for="title">title : </label>
       <input type="text" id="title" v-model="title"><br>

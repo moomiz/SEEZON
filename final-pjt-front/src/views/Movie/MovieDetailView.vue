@@ -2,15 +2,23 @@
   <div class="detail">
     <div class="title">
       <h3 class="m-3">{{ movie?.title }}</h3>
-      <router-link to="../">[BACK]</router-link>
+      <div>
+        <span class="mx-3" v-if="isIn" @click="movieLike">💖</span>
+        <span class="mx-3" v-if="!isIn" @click="movieLike">🤍</span>
+        <span>{{ movieLikeUsers }}</span>
+        <router-link to="../">[BACK]</router-link>
+      </div>
     </div>
     <div>
       <img :src="`https://www.themoviedb.org/t/p/w500/${movie?.poster_path}`" :alt="movie?.title">
       <p>{{ movie?.overview }}</p>
     </div>
-    <MovieReview :reviews=reviews />
+    <MovieReview :reviews=reviews 
+      @new-review="reviewAdd"
+    />
     <hr>
     <MovieArticle :articles=articles />
+    <router-link :to="{ name: 'movierelatedarticle', params: { id: movie.id } }">[NEW ARTICLE]</router-link>
     <!-- {{ reviews }} -->
     <!-- <div class="movie-info">
       <p>{{ movie?.title }}</p>
@@ -38,6 +46,8 @@ export default {
       movie: null,
       reviews: null,
       articles: null,
+      isIn: false,
+      movieLikeUsers: 0,
     }
   },
   methods: {
@@ -47,6 +57,8 @@ export default {
         url: `http://127.0.0.1:8000/api/v1/movies/${this.$route.params.id}/`,
       }).then((res)=>{
         this.movie = res.data
+        this.isIn = this.movie.like_users.includes(this.$store.state.id)
+        this.movieLikeUsers = this.movie.like_users.length
         if (this.movie.articles) {
           this.getMovieArticle()
         }
@@ -78,7 +90,23 @@ export default {
       }).catch((err)=>{
         console.log(err)
       })
-    }
+    },
+    reviewAdd() {
+      this.getMovieReview()
+    },
+    movieLike() {
+      if (this.$store.getters.isLogin === true) {
+        this.$store.dispatch('movieLike', this.movie.id)
+        if (this.isIn) {
+          this.movieLikeUsers -= 1
+        } else {
+          this.movieLikeUsers += 1
+        }
+        this.isIn = !this.isIn
+      } else {
+        alert('로그인이 필요합니다!')
+      }
+    },
   },
   created(){
     this.getMovieDetail()

@@ -21,7 +21,6 @@ export default {
     name: 'ProfileUpdateView',
     data() {
       return {
-        recentUser: this.$route.params.username,
         firstName: null,
         lastName: null,
         isAdult: false,
@@ -32,6 +31,7 @@ export default {
         const firstName = this.firstName
         const lastName = this.lastName
         const isAdult = this.isAdult
+        // console.log(this.recentUser)
 
         const payload = {
           username: this.recentUser,
@@ -44,6 +44,11 @@ export default {
       },
       Adult(){
         this.isAdult = !this.isAdult
+      }
+    },
+    computed: {
+      recentUser() {
+        return this.$route.params.username
       }
     },
     created() {

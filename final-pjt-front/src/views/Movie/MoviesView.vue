@@ -1,19 +1,25 @@
 <template>
   <div>
-    <h3>오늘의 추천 영화</h3>
     <MovieSearchBar/>
-    <RecommendMovie/>
-    <h3>좋아요 기반 추천 영화</h3>
-    <RecommendMovie/>
-    <h3>최근 뜨는 작품</h3>
-    <RecommendMovie/>
+    <div>
+      <h3>오늘의 추천 영화</h3>
+      <RecommendMovie/>
+    </div>
+    <div v-if="isLogin">
+      <h3>{{ username }}님을 위한 추천 영화</h3>
+      <RecommendMovie/>      
+    </div>
+    <div>
+      <h3>최근 뜨는 작품</h3>
+      <RecommendMovie/>
+    </div>
     <MovieList/>
   </div>
 </template>
 
 <script>
 import MovieList from '@/components/Movie/MovieList'
-import RecommendMovie from '@/components/Recommend/RecommendMovie.vue';
+import RecommendMovie from '@/components/Recommend/RecommendMovie';
 import MovieSearchBar from '@/components/Movie/MovieSearchBar';
 
 export default {
@@ -21,7 +27,15 @@ export default {
   components: {
     MovieList,
     RecommendMovie,
-    MovieSearchBar
+    MovieSearchBar,
+  },
+  computed: {
+    isLogin() {
+      return this.$store.getters.isLogin
+    },
+    username() {
+      return this.$store.state.username
+    }
   }
 }
 </script>

@@ -2,7 +2,9 @@
   <div>
     <h5>Review</h5>
     <hr>
-    <MovieReviewCreateForm />
+    <MovieReviewCreateForm
+      @new-review="reviewAdd"
+    />
     <MovieReviewItem
     v-for="review in reviews"
     :review="review"
@@ -21,6 +23,11 @@ export default {
   components: {
     MovieReviewItem,
     MovieReviewCreateForm
+  },
+  methods: {
+    reviewAdd() {
+      this.$emit('new-review')
+    }
   }
 }
 </script>

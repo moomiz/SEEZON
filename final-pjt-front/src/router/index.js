@@ -13,6 +13,7 @@ import LogoutView from '@/views/Account/LogoutView'
 import ProfileView from '@/views/Account/ProfileView'
 import ProfileUpdateView from '@/views/Account/ProfileUpdateView'
 import MovieDetailPageView from '@/views/Movie/MovieDetailPageView'
+import MovieRelatedArticleCreateView from '@/views/Article/MovieRelatedArticleCreateView'
 
 Vue.use(VueRouter)
 
@@ -92,7 +93,12 @@ const routes = [
     path: '/profile/:username/update',
     name: 'profile-update',
     component: ProfileUpdateView,
-  }
+  },
+  {
+    path: '/movie/:id/article/create',
+    name: 'movierelatedarticle',
+    component: MovieRelatedArticleCreateView,
+  },
 ]
 
 const router = new VueRouter({
