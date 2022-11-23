@@ -106,3 +106,10 @@ def nobody_recommend_movie_list(request):
     movies = get_list_or_404(Movie.objects.order_by('?'), like_users__isnull=True)[:30]
     serializer = MovieSerializer(movies, many=True)
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+def user_recommend_movie_list(request):
+    movies = get_list_or_404(Movie.objects.distinct(), genres__in=request.data['genres'])
+    serializer = MovieSerializer(movies, many=True)
+    return Response(serializer.data)

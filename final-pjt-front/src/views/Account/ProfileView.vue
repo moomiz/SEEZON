@@ -38,7 +38,7 @@ export default {
     getUsers() {
       axios({
         method: 'get',
-        url: `http://127.0.0.1:8000/api/v3/${this.$route.params.username}/`,
+        url: `http://127.0.0.1:8000/api/v3/detail/${this.$route.params.username}/`,
       }).then((res)=>{
         this.user = res.data
         this.isIn = this.user.followers.includes(this.$store.state.id)

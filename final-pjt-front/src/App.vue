@@ -7,9 +7,9 @@
         <router-link v-if="!isLogin" :to="{ name: 'login' }">login</router-link>
         <router-link v-if="isLogin" :to="{ name: 'logout' }">logout</router-link> |
         <router-link :to="{ name: 'article' }">article</router-link>
+        <span v-if="isLogin"> | </span>
+        <router-link v-if="isLogin" :to="{ name: 'profile', params: { username: recentUser } }">profile</router-link> 
       </div>
-      <span v-if="isLogin"> | </span>
-      <router-link v-if="isLogin" :to="{ name: 'profile', params: { username: recentUser } }">profile</router-link> 
       <MovieSearchBar />
     </nav>
     <router-view/>

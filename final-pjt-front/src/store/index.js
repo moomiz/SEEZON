@@ -20,7 +20,7 @@ export default new Vuex.Store({
   getters: {
     isLogin(state) {
       return state.token ? true : false
-    }
+    },
   },
   mutations: {
     SAVE_TOKEN(state, payload) {
@@ -31,9 +31,11 @@ export default new Vuex.Store({
       state.id = payload.id
       state.isAdult = payload.isAdult
       const genres = []
-      payload.genres.forEach((genre) => {
-        genres.push(genre.id)
-      });
+      if (payload.genres) {
+        payload.genres.forEach((genre) => {
+          genres.push(genre.id)
+        }) 
+      }
       state.like_genre = genres
       router.go(-1)
     },
@@ -45,9 +47,11 @@ export default new Vuex.Store({
       state.id = payload.id
       state.isAdult = payload.isAdult
       const genres = []
-      payload.genres.forEach((genre) => {
-        genres.push(genre.id)
-      });
+      if (payload.genres) {
+        payload.genres.forEach((genre) => {
+          genres.push(genre.id)
+        }) 
+      }
       state.like_genre = genres
     },
     LOGOUT(state) {
@@ -83,7 +87,7 @@ export default new Vuex.Store({
     recentUser(context, userdata) {
       axios({
         method:'get',
-        url: `${API_URL}/api/v3/${userdata.username}/`,
+        url: `${API_URL}/api/v3/detail/${userdata.username}/`,
         headers: {
           Authorization: `Token ${userdata.token}`,
         }
@@ -95,7 +99,7 @@ export default new Vuex.Store({
           isAdult: res.data.is_adult,
           username: res.data.username,
           token: userdata.token,
-          genres: res.data.like_movies[res.data.like_movies.length - 1].genres
+          genres: res.data.like_movies[res.data.like_movies.length - 1]?.genres,
         }
         context.commit('SAVE_TOKEN', payload)
       }).catch((err)=>{
@@ -105,7 +109,7 @@ export default new Vuex.Store({
     lastMovie(context, userdata) {
       axios({
         method:'get',
-        url: `${API_URL}/api/v3/${userdata.username}/`,
+        url: `${API_URL}/api/v3/detail/${userdata.username}/`,
         headers: {
           Authorization: `Token ${userdata.token}`,
         }
@@ -117,7 +121,7 @@ export default new Vuex.Store({
           isAdult: res.data.is_adult,
           username: res.data.username,
           token: userdata.token,
-          genres: res.data.like_movies[res.data.like_movies.length - 1].genres
+          genres: res.data.like_movies[res.data.like_movies.length - 1]?.genres,
         }
         context.commit('SAVE_MOVIE', payload)
       }).catch((err)=>{
@@ -149,15 +153,16 @@ export default new Vuex.Store({
           password2: payload.password2,
         },
         // headers: {'Content-Type': 'application/x-www-form-urlencoded' },
-      })
-        .then((res) => {
+      }).then((res) => {
           // console.log(res)
           const userdata = {
             token: res.data.key,
             username: payload.username
           }
           context.dispatch('recentUser', userdata)
-        })
+      }).catch((err)=>{
+        console.log(err)
+      })
     },
     withDrawal(context) {
       axios({

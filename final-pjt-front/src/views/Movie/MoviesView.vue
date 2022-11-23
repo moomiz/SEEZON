@@ -72,12 +72,15 @@ export default {
     },
     forUserMovies() {
       axios({
-        method: 'get',
-        url: 'http://127.0.0.1:8000/api/v1/movies/recommend/nobody/',
+        method: 'post',
+        url: 'http://127.0.0.1:8000/api/v1/movies/recommend/user/',
+        data: {
+          genres: this.$store.state.like_genre
+        },
       }).then((res)=>{
         // this.todayRecommend = _.orderBy(res.data, 'like_users', 'articles', )
-        this.nobody = res.data
-        console.log(this.nobody)
+        this.forUser = res.data
+        console.log(this.forUser)
       }).catch((err)=>{
         console.log(err, '포유저')
       })
@@ -113,7 +116,7 @@ export default {
   },
   created() {
     this.todayRecommendMovies()
-    if (this.$store.getters.isLogin === true) {
+    if (this.$store.getters.isLogin) {
       this.forUserMovies()
     }
     this.recentMovies()

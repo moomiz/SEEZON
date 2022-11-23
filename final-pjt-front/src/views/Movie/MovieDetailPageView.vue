@@ -12,6 +12,7 @@
     <div>
       <img :src="`https://www.themoviedb.org/t/p/w500/${movie?.poster_path}`" :alt="movie?.title">
       <p>{{ movie?.overview }}</p>
+      <p v-for="genre in movie?.genres" :key="genre?.id">{{ genre?.name }}</p>
     </div>
     <MovieReview :reviews=reviews 
       @new-review="reviewAdd"

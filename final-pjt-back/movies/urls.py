@@ -8,6 +8,7 @@ urlpatterns = [
     path('movies/recommend/', views.recommend_movie_list),
     path('movies/recommend/today/', views.today_recommend_movie_list),
     path('movies/recommend/nobody/', views.nobody_recommend_movie_list),
+    path('movies/recommend/user/', views.user_recommend_movie_list),
     path('movies/<int:pk>/', views.movie_detail),
     path('movies/<int:pk>/like/', views.movie_like),
     path('movies/<int:movie_pk>/review/<int:review_pk>/', views.movie_review),

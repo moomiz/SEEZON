@@ -44,6 +44,11 @@ export default {
       this.$store.dispatch('signUp', payload)
 
     }
+  },
+  mounted() {
+    if (this.$store.getters.isLogin === true) {
+      this.$router.push({ name: 'index' })
+    }
   }
 
 }

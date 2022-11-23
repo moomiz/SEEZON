@@ -54,7 +54,7 @@ export default {
     created() {
       axios({
         method: 'get',
-        url: `http://127.0.0.1:8000/api/v3/${this.recentUser}/`
+        url: `http://127.0.0.1:8000/api/v3/detail/${this.recentUser}/`
       }).then((res)=>{
         this.firstName = res.data.first_name
         this.lastName = res.data.last_name
