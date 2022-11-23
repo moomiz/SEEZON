@@ -64,4 +64,11 @@ export default {
 .SearchBar{
 
 }
+#modal-1___BV_modal_footer_ button {
+   display: none;
+}
+#modal-1___BV_modal_header_ button{
+   background-color:transparent;
+   border: transparent;
+   }
 </style>
