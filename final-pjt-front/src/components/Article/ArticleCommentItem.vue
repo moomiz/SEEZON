@@ -34,7 +34,7 @@ export default {
       edit: false,
       isIn: false,
       delete: false,
-      commentLikeUsers: null,
+      commentLikeUsers: 0,
     }
   },
   methods: {

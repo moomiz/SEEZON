@@ -20,7 +20,7 @@
     },
     methods: {
       createMovieReview() {
-        if (this.$store.state.username) {
+        if (this.$store.getters.isLogin === true) {
           const content = this.content
           const id = this.$route.params.id
           axios({

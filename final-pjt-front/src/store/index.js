@@ -267,7 +267,36 @@ export default new Vuex.Store({
       }).catch((err)=>{
         console.log(err)
       })
-    }
+    },
+    reviewEdit(context, payload) {
+      axios({
+        method: 'put',
+        url: `${API_URL}/api/v1/movies/${payload.movieId}/review/${payload.reviewId}/`,
+        data: {
+          content: payload.reviewContent,
+        },
+        headers: {
+          Authorization: `Token ${this.state.token}`,
+        },
+      }).then(()=>{
+        // router.go(router.currentRoute)
+      }).catch((err)=>{
+        console.log(err)
+      })
+    },
+    reviewLike(context, reviewId) {
+      axios({
+        method: 'post',
+        url: `${API_URL}/api/v1/movies/review/${reviewId}/like/`,
+        headers: {
+          Authorization: `Token ${this.state.token}`,
+        },
+      }).then((res)=>{
+        console.log(res)
+      }).catch((err)=>{
+        console.log(err)
+      })
+    },
   },
   modules: {
   }

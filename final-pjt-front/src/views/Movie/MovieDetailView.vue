@@ -47,6 +47,12 @@ export default {
         url: `http://127.0.0.1:8000/api/v1/movies/${this.$route.params.id}/`,
       }).then((res)=>{
         this.movie = res.data
+        if (this.movie.articles) {
+          this.getMovieArticle()
+        }
+        if (this.movie.reviews) {
+          this.getMovieReview()
+        }
       }).catch((err)=>{
         console.log(err)
       })
@@ -77,8 +83,6 @@ export default {
   created(){
     this.getMovieDetail()
     console.log('왜이러는거지')
-    this.getMovieReview()
-    this.getMovieArticle()
   }
 }
 </script>
