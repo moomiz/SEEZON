@@ -53,7 +53,7 @@ def movie_review(request, movie_pk, review_pk):
 
 @api_view(['GET'])
 def movie_review_list(request, movie_pk):
-    review = get_list_or_404(Review, movie=movie_pk)
+    review = get_list_or_404(Review.objects.order_by('-pk'), movie=movie_pk)
     serializer = ReviewSerializer(review, many=True)
     return Response(serializer.data)
 

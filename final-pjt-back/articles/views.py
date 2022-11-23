@@ -13,7 +13,7 @@ from .models import Article, Comment
 # Create your views here.
 @api_view(['GET'])
 def article_list(request):
-    articles = get_list_or_404(Article)
+    articles = get_list_or_404(Article.objects.order_by('-pk'))
     serializer = ArticleSerializer(articles, many=True)
     return Response(serializer.data)
 
@@ -40,7 +40,7 @@ def article_detail(request, pk):
     
 @api_view(['GET'])
 def movie_article(request, movie_pk):
-    article = get_list_or_404(Article, movie=movie_pk)
+    article = get_list_or_404(Article.objects.order_by('-pk'), movie=movie_pk)
     serializer = ArticleSerializer(article, many=True)
     return Response(serializer.data)
 

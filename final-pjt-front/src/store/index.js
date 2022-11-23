@@ -195,7 +195,7 @@ export default new Vuex.Store({
         }
       }).then(()=>{  // res
         // context.commit('CREATE_ARTICLE', res.data)
-        router.push({ name: 'moviedetail', params: {id: payload.movie } })
+        router.go(-1)
       }).catch((err)=>{
         console.log(err)
       })

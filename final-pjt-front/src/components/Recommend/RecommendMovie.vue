@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <swiper :options="swiperOption" ref="mySwiper" class="swiper py-5">
@@ -8,7 +7,7 @@
         :movie=movie
         />
         <div class="swiper-button-prev swiper-btn-prev" style="color:palevioletred" slot="button-prev"></div>
-		<div class="swiper-button-next swiper-btn-next" style="color:palevioletred" slot="button-next"></div>
+        <div class="swiper-button-next swiper-btn-next" style="color:palevioletred" slot="button-next"></div>
     </swiper>
   </div>
 </template>
@@ -31,10 +30,11 @@ export default {
     return{
       movies: null,
       imgIndex: 5,
-      swiperOption: {
+      swiperOption: { 
         notNextTick: true,
         spaceBetween: 6,
         loop: true,
+        loopedSlides: 1,
         initialSlide: 0,
         speed: 500,
         direction: "horizontal",
@@ -50,9 +50,9 @@ export default {
           type: "bullets"
         },
         navigation: {
-						nextEl: '.swiper-button-next',
-						prevEl: '.swiper-button-prev',
-					},  
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },  
         breakpoints : { // 반응형 설정이 가능 width값으로 조정
           '@0.75': {
       slidesPerView: 2,
