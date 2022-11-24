@@ -15,6 +15,22 @@
         <p >{{ movie?.overview }}</p>
         <hr>
         <span v-for="genre in movie?.genres" class="px-2" :key="genre?.id">{{ genre?.name }}</span>
+        <div v-if="whereCanStream">
+          <hr>
+          <h5>STREAMING</h5>
+          <span v-for="stream in whereCanStream" :key="stream?.provider_id" class="px-1"><img class="rounded" :src="`https://www.themoviedb.org/t/p/original${stream?.logo_path}`" :alt="stream?.provider_name"></span>
+        </div>
+        <div v-if="whereCanRent">
+          <hr>
+          <h5>RENT</h5>
+          <span v-for="rent in whereCanRent" :key="rent?.provider_id" class="px-1"><img class="rounded" :src="`https://www.themoviedb.org/t/p/original${rent?.logo_path}`" :alt="rent?.provider_name"></span>
+        </div>
+        <div v-if="whereCanBuy">
+          <hr>
+          <h5>BUY</h5>
+          <span v-for="buy in whereCanBuy" :key="buy?.provider_id" class="px-1"><img class="rounded" :src="`https://image.tmdb.org/t/p/original${buy?.logo_path}`" :alt="buy?.provider_name"></span>
+        </div>
+        <hr>
         <MovieArticle :articles=articles />
         <router-link :to="{ name: 'movierelatedarticle', params: { id: movie?.id } }">[NEW ARTICLE]</router-link>
       </div>
@@ -36,8 +52,11 @@
 
 <script>
 import axios from 'axios'
+// import _ from 'lodash'
 import MovieReview from '@/components/Movie/MovieReview'
 import MovieArticle from '@/components/Movie/MovieArticle'
+
+const API_KEY = process.env.VUE_APP_TMDB_API_KEY
 
 export default {
   name: 'DetailView',
@@ -52,6 +71,9 @@ export default {
       articles: null,
       isIn: false,
       movieLikeUsers: 0,
+      whereCanStream: false,
+      whereCanRent: false,
+      whereCanBuy: false,
     }
   },
   methods: {
@@ -111,23 +133,23 @@ export default {
         alert('로그인이 필요합니다!')
       }
     },
-    // genreLike() {
-    //   this.movie.genres.map((genre)=>{
-    //     axios({
-          
-    //     })
-    //   })
-    // },
-    // genreUnLike() {
-    //   this.movie.genres.map((genre)=>{
-    //     axios({
-          
-    //     })
-    //   })
-    // },
+    getWhereCan() {
+      axios({
+        method: 'get',
+        url: `https://api.themoviedb.org/3/movie/${this.$route.params.id}/watch/providers?api_key=${API_KEY}`
+      }).then((res)=>{
+        console.log(res.data.results.KR)
+        this.whereCanStream = res.data.results.KR.flatrate
+        this.whereCanRent = res.data.results.KR.rent
+        this.whereCanBuy = res.data.results.KR.buy
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }
   },
   created(){
     this.getMovieDetail()
+    this.getWhereCan()
     console.log('왜이러는거지')
   }
 }
