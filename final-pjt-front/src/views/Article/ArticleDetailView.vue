@@ -101,7 +101,6 @@ export default {
   display: flex;
   justify-content: center;
   width: 100%;
-  min-height: 100vh;
   background-color: black;
   font-size: 15px
 }
@@ -109,7 +108,6 @@ export default {
   display: flex;
   text-decoration-line: none ;
   text-align: center;
-  height: 3%;
 }
 .upde{
   margin-left: auto;
@@ -125,7 +123,6 @@ export default {
 .articleContent{
   display: flex;
   text-align:start ;
-  height:30%;
   padding-top:30px;
   padding-bottom:30px;
 }

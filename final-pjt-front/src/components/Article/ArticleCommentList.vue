@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height:auto;">
     <ArticleCommentItem
       v-for="comment in comments" :key="comment.id"
       :comment=comment

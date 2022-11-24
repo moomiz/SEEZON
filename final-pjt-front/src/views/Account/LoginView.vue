@@ -15,9 +15,11 @@
                 <label class="form-control-label" for="password"> PASSWORD  </label>
                 <input class="form-control" type="password" id="password" v-model="password">
               </div>
-           <input type="submit" value="logIn">
+              <div class="login-btm">
+                <input class="btn" type="submit" value="logIn">
+                <router-link class="btn" :to="{ name: 'signup' }">signup</router-link>
+              </div>
         </form>
-        <router-link :to="{ name: 'signup' }">signup</router-link>
         </div>
         </div>   
       </div>
@@ -166,7 +168,8 @@ label {
 }
 
 .login-btm {
-    float: left;
+    float: right;
+    padding-bottom:20px;
 }
 
 .login-button {
@@ -184,5 +187,7 @@ label {
 .loginbttm {
     padding: 0px;
 }
-
+.btn{
+  color:#e93c78
+}
 </style>

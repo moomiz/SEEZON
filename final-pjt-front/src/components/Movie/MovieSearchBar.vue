@@ -1,6 +1,6 @@
 <template>
-    <div class="SearchBar">
-        <h5 class="hoverpink" style="background-color:transparent; padding-left: 10px;" v-b-modal.modal-1>Search</h5>
+    <div class="SearchBar" >
+        <h5 style="background-color:transparent; padding-left: 10px;" v-b-modal.modal-1>Search</h5>
         <b-modal id="modal-1" title="Search">
             <input type="text"
             v-model="MovieTitleSearchString" 
@@ -8,10 +8,9 @@
         <div class="movie" v-for="movie in filteredMovieFeed" :key="movie.id">
             <router-link
             :to="{ name: 'moviedetailpage', params: { id: movie.id } }">
-            <img :src="`https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`" :alt="movie.title">
+            <img class="search_bar_poster" :src="`https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`" :alt="movie.title">
             </router-link>
             <br>
-            <h3>{{ movie?.title }}</h3>
         </div>
     </b-modal>
     </div>
@@ -61,6 +60,12 @@ export default {
 </script>
 
 <style>
+#modal-1___BV_modal_content_{
+    background: rgb(42, 42, 42);
+    color:#e93c78;
+    font-weight: bold
+    ;
+}
 
 #modal-1___BV_modal_footer_ button {
    display: none;
@@ -69,6 +74,17 @@ export default {
    background-color:transparent;
    border: transparent;
    }
+.modal-header{
+    height: 10%;
+}
+.modal-body{
+}
+.modal-body input{
+    width:80%;
+}
+.search_bar_poster{
+   padding-bottom: 10px;
+}
 
 .hoverpink {
   color: white
