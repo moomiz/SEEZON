@@ -1,38 +1,41 @@
 <template>
   <div class="detail">
     <div class="title">
-      <h3 class="m-3">{{ movie?.title }}</h3>
-        <router-link style="text-decoration-line: none; color:palevioletred" :to="{ name: 'index' }"><h1>⬅</h1></router-link>
-    </div>
-    <div class="middle">
-      <img class="moviePoster" :src="`https://www.themoviedb.org/t/p/w500/${movie?.poster_path}`" :alt="movie?.title">
-      <div class="middleLeft">
+        <h3 class="m-3 " style="padding-left:10%">{{ movie?.title }}</h3>
+        <div>
+          <router-link style="text-decoration-line: none; text-align: center; padding-right:200px; color:palevioletred" :to="{ name: 'index' }"><h1>⬅</h1></router-link>
+        </div>
+      </div> 
+      <div class="middle">
+        <img class="moviePoster" :src="`https://www.themoviedb.org/t/p/w500/${movie?.poster_path}`" :alt="movie?.title">
+        <div class="middleRight">
         <div class="like">
-          <span class="mx-3 hoverpink" v-if="isIn" @click="movieLike">💖</span>
-          <span class="mx-3 hoverpink" v-if="!isIn" @click="movieLike">🤍</span>
+          <span class="mx-3 heart"  v-if="isIn" @click="movieLike">💖</span>
+          <span class="mx-3 heart" v-if="!isIn" @click="movieLike">🤍</span>
           <span>{{ movieLikeUsers }}</span>
-        </div>
-        <p >{{ movie?.overview }}</p>
-        <hr>
-        <span v-for="genre in movie?.genres" class="px-2" :key="genre?.id">{{ genre?.name }}</span>
-        <div v-if="whereCanStream">
-          <hr>
-          <h5>STREAMING</h5>
-          <span v-for="stream in whereCanStream" :key="stream?.provider_id" class="px-1"><img class="rounded" :src="`https://www.themoviedb.org/t/p/original${stream?.logo_path}`" :alt="stream?.provider_name"></span>
-        </div>
-        <div v-if="whereCanRent">
-          <hr>
-          <h5>RENT</h5>
-          <span v-for="rent in whereCanRent" :key="rent?.provider_id" class="px-1"><img class="rounded" :src="`https://www.themoviedb.org/t/p/original${rent?.logo_path}`" :alt="rent?.provider_name"></span>
-        </div>
-        <div v-if="whereCanBuy">
-          <hr>
-          <h5>BUY</h5>
-          <span v-for="buy in whereCanBuy" :key="buy?.provider_id" class="px-1"><img class="rounded" :src="`https://image.tmdb.org/t/p/original${buy?.logo_path}`" :alt="buy?.provider_name"></span>
+      </div>
+      <hr>
+      <span v-for="genre in movie?.genres" class="px-2" :key="genre?.id">{{ genre?.name }}</span>
+      <hr>
+      <p >{{ movie?.overview }}</p>
+      <hr>
+        <div class="site">
+          <div v-if="whereCanStream">
+            <h5 style="padding-right:10px">STREAMING</h5>
+            <span v-for="stream in whereCanStream" :key="stream?.provider_id" class="px-1"><img class="rounded" :src="`https://www.themoviedb.org/t/p/original${stream?.logo_path}`" :alt="stream?.provider_name"></span>
+          </div>
+          <div style="padding-right:10px; justify-content: ;" v-if="whereCanRent">
+            <h5 >RENT</h5>
+            <span v-for="rent in whereCanRent" :key="rent?.provider_id" class="px-1"><img class="rounded" :src="`https://www.themoviedb.org/t/p/original${rent?.logo_path}`" :alt="rent?.provider_name"></span>
+          </div>
+          <div style="padding-right:10px" v-if="whereCanBuy">
+            <h5 >BUY</h5>
+            <span v-for="buy in whereCanBuy" :key="buy?.provider_id" class="px-1"><img class="rounded" :src="`https://image.tmdb.org/t/p/original${buy?.logo_path}`" :alt="buy?.provider_name"></span>
+          </div>
         </div>
         <hr>
         <MovieArticle :articles=articles />
-        <router-link :to="{ name: 'movierelatedarticle', params: { id: movie?.id } }">[NEW ARTICLE]</router-link>
+        <router-link class="btn" :to="{ name: 'movierelatedarticle', params: { id: movie?.id } }">NEW ARTICLE</router-link>
       </div>
     </div>
     <hr>
@@ -164,36 +167,38 @@ export default {
   right: 0;
   height: 75px;
   padding: 1rem;
-  color:#2c3e50;
-  background: transparent;
+  color:#f8f8f8;
+  background: #0000004c;
   font-weight: bold;
   display: flex;
   justify-content: space-between;
+  text-align: justify;
   align-items: center;
 }
 
 .detail {
-  color: #2c3e50;
+  color: #ffffffb4;
 }
 .like{
   padding:30px;
 }
-.middle{
-  display: inline-flex;
-  flex-direction: row;
+.middleRight{
+  padding:30px;
+  margin-right: 100px;
+  min-height: 560px;
   
 }
 
 .moviePoster {
   padding:30px;
   margin-left: 10%;
-
+  max-height: 560px;
 }
 
-.middleLeft{
-  padding:30px;
-  margin-right: 10%;
-
+.middle{
+  display: inline-flex;
+  flex-direction: row;
+ 
 }
 .movieReview{
   padding-bottom: 5%;

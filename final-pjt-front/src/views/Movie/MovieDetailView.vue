@@ -6,33 +6,33 @@
     </div>
     <div class="middle">
       <img class="moviePoster" :src="`https://www.themoviedb.org/t/p/w500/${movie?.poster_path}`" :alt="movie?.title">
-      <div class="middleLeft">
+      <div class="middleRight">
         <div class="like">
           <span class="mx-3 hoverpink" v-if="isIn" @click="movieLike">💖</span>
           <span class="mx-3 hoverpink" v-if="!isIn" @click="movieLike">🤍</span>
           <span>{{ movieLikeUsers }}</span>
         </div>
-        <p >{{ movie?.overview }}</p>
         <hr>
         <span v-for="genre in movie?.genres" class="px-2" :key="genre?.id">{{ genre?.name }}</span>
-        <div v-if="whereCanStream">
-          <hr>
-          <h5>STREAMING</h5>
-          <span v-for="stream in whereCanStream" :key="stream?.provider_id" class="px-1"><img class="rounded" :src="`https://www.themoviedb.org/t/p/original${stream?.logo_path}`" :alt="stream?.provider_name"></span>
-        </div>
-        <div v-if="whereCanRent">
-          <hr>
-          <h5>RENT</h5>
-          <span v-for="rent in whereCanRent" :key="rent?.provider_id" class="px-1"><img class="rounded" :src="`https://www.themoviedb.org/t/p/original${rent?.logo_path}`" :alt="rent?.provider_name"></span>
-        </div>
-        <div v-if="whereCanBuy">
-          <hr>
-          <h5>BUY</h5>
-          <span v-for="buy in whereCanBuy" :key="buy?.provider_id" class="px-1"><img class="rounded" :src="`https://image.tmdb.org/t/p/original${buy?.logo_path}`" :alt="buy?.provider_name"></span>
+        <hr>
+        <p >{{ movie?.overview }}</p>
+        <div class="site">
+          <div v-if="whereCanStream">
+            <h5 style="padding-right:10px">STREAMING</h5>
+            <span v-for="stream in whereCanStream" :key="stream?.provider_id" class="px-1"><img class="rounded" :src="`https://www.themoviedb.org/t/p/original${stream?.logo_path}`" :alt="stream?.provider_name"></span>
+          </div>
+          <div style="padding-right:10px" v-if="whereCanRent">
+            <h5 >RENT</h5>
+            <span v-for="rent in whereCanRent" :key="rent?.provider_id" class="px-1"><img class="rounded" :src="`https://www.themoviedb.org/t/p/original${rent?.logo_path}`" :alt="rent?.provider_name"></span>
+          </div>
+          <div style="padding-right:10px" v-if="whereCanBuy">
+            <h5 >BUY</h5>
+            <span v-for="buy in whereCanBuy" :key="buy?.provider_id" class="px-1"><img class="rounded" :src="`https://image.tmdb.org/t/p/original${buy?.logo_path}`" :alt="buy?.provider_name"></span>
+          </div>
         </div>
         <hr>
         <MovieArticle :articles=articles />
-        <router-link :to="{ name: 'movierelatedarticle', params: { id: movie?.id } }">[NEW ARTICLE]</router-link>
+        <router-link :to="{ name: 'movierelatedarticle', params: { id: movie?.id } }">NEW ARTICLE</router-link>
       </div>
     </div>
     <hr>
@@ -181,5 +181,23 @@ export default {
 }
 .hoverpink:hover {
   color: palevioletred;
+}
+.rounded{
+  max-height: 30px;
+  max-width: 30px;
+}
+.site{
+  display: inline-flex;
+  padding:10px;
+  width:80%;
+  justify-content: space-between;
+}
+p a{
+  text-decoration: none;
+  color: rgb(187, 187, 187);;
+}
+p a:hover{
+  text-decoration: none;
+  color: rgb(114, 114, 114);;
 }
 </style>

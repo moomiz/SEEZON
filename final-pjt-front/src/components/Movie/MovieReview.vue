@@ -33,5 +33,7 @@ export default {
 </script>
 
 <style>
-
+p{
+  text-decoration: none;
+}
 </style>
