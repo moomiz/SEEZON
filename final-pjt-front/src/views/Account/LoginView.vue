@@ -5,7 +5,6 @@
       <div class="col-lg-6 col-md-8 login-box">
         <div class="col-lg-12 login-title">LogIn Page</div>
         <div class="col-lg-12 login-form">
-          <div class="col-lg-12 login-form">
             <form class="m-3" @submit.prevent="logIn">
               <div class="form-group">
                 <labe class="form-control-label" for="username">ID </labe>
@@ -16,11 +15,10 @@
                 <input class="form-control" type="password" id="password" v-model="password">
               </div>
               <div class="login-btm">
-                <input class="btn" type="submit" value="logIn">
+                <input class="btn"  type="submit" value="logIn">
                 <router-link class="btn" :to="{ name: 'signup' }">signup</router-link>
               </div>
-        </form>
-        </div>
+          </form>
         </div>   
       </div>
     </div> 
@@ -65,9 +63,9 @@ export default {
     margin-top: 75px;
     height: auto;
     border-radius: 15px;
-    background: rgb(25, 25, 25);
+    background: rgba(25, 25, 25, 0.96);
     text-align: center;
-    box-shadow: 0 3px 6px rgba(41, 41, 41, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    box-shadow: 0 3px 6px rgba(46, 45, 45, 0), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .login-key {
@@ -188,6 +186,6 @@ label {
     padding: 0px;
 }
 .btn{
-  color:#e93c78
+  color:#e93c78 
 }
 </style>

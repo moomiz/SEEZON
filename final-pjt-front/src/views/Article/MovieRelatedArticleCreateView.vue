@@ -3,17 +3,27 @@
         rgba(0, 0, 0, 0.5),
         rgba(0, 0, 0, 0.5)
       ), url(https://image.tmdb.org/t/p/original${backdrop})`}">
-      <div class="p-5">
-        <form @submit.prevent="createMovieArticle">
-          <label for="title">title : </label>
-          <input type="text" id="title" v-model="title"><br>
-    
-          <label for="content">content : </label>
-          <textarea id="content" v-model="content"></textarea><br>
-    
-          <input type="submit" value="create">
-        </form>
-      </div>
+       <div class="row" style:>
+        <div class="col-lg-3 col-md-2"></div>
+          <div class="col-lg-6 col-md-8 login-box">
+            <div class="col-lg-12 login-title">Article Create</div>
+            <div class="col-lg-12 login-form">
+              <form class="m-3" @submit.prevent="createMovieArticle">
+                <div class="form-group">
+                  <label class="form-control-label" for="title">title : </label>
+                  <input class="form-control" type="text" id="title" v-model="title"><br>
+                </div>
+                <div class="form-group">
+                  <label class="form-control-label" for="content">content : </label>
+                  <textarea type="content" class="form-control-textarea" id="content" v-model="content"></textarea><br>
+                </div>
+                <div class="login-btm">
+                  <input class="btn" type="submit" value="create">
+                </div>
+              </form>
+            </div>
+         </div>
+       </div>
     </div>
   </template>
   

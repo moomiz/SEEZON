@@ -1,17 +1,28 @@
 <template>
-  <div style="width: 100%; min-height: 100vh;">
-    <form @submit.prevent="userUpdate">
-      <label for="first-name">first name : </label>
-      <input type="text" id="first-name" v-model="firstName">
-      
-      <label for="last-name">last name : </label>
-      <input type="text" id="last-name" v-model="lastName">
-
-      <label for="is-adult">adult? : </label>
-      <input type="checkbox" id="is-adult" :checked="isAdult" @change="Adult">
-      <br>
-      <input type="submit" value="[UPDATE]">
-    </form>
+  <div class="container" style="width: 100%; min-height: 100vh;">
+    <div class="row">
+      <div class="col-lg-3 col-md-2"></div>
+      <div class="col-lg-6 col-md-8 login-box">
+        <div class="col-lg-12 login-title">Profile Update</div>
+        <div class="col-lg-12 login-form">
+          <form class="m-3" @submit.prevent="userUpdate">
+            <div class="form-group">
+              <label class="form-control-label" for="first-name">first name : </label>
+              <input class="form-control" type="text" id="first-name" v-model="firstName">
+            </div>
+            <div class="form-group">
+              <label class="form-control-label" for="last-name">last name : </label>
+              <input class="form-control" type="text" id="last-name" v-model="lastName">
+            </div>
+            <label class="form-control-label"  for="is-adult">adult? : </label>
+            <input type="checkbox" id="is-adult" :checked="isAdult" @change="Adult">
+            <div class="login-btm">
+              <input class="btn" type="submit" value="UPDATE">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
