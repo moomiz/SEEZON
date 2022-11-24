@@ -18,7 +18,7 @@
         <span class="heart" v-if="!isIn" @click="articleLike"><h5>🤍</h5></span>
         </div>
         <hr>
-        <pre class="articleContent">{{ article?.content }}</pre>
+        <p class="articleContent" style="white-space:pre-line;">{{ article?.content }}</p>
         <hr>
         <CommentCreateForm class="commentForm"
         @new-comment="commetAdd" />
@@ -122,6 +122,8 @@ export default {
   margin-left: auto;
 }
 .articleContent{
+  font-size: 20px;
+  word-break: break-all;
   display: flex;
   text-align:start ;
   padding:20px;

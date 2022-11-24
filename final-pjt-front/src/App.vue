@@ -12,6 +12,26 @@
       </div>
     </nav>
     <router-view/>
+    <footer>
+      <hr>
+      <h5 class="text-start px-5 mx-5 pt-2">SEEZONE</h5>
+      <hr>
+      <div class="d-flex justify-content-between px-5 pt-2">
+        <div class="d-flex">
+          <p class="px-5">SSAFY 8 GUMI team 9 </p>
+          <p class="px-5">공지사항</p>
+          <p class="px-5">이용약관</p>
+          <p class="px-5">청소년 보호 정책</p>
+        </div>
+        <p class="px-5"> LEESIJUN - KIMMINJI</p>
+      </div>
+      <hr>
+      <div class="d-flex justify-content-between px-5">
+        <p class="px-5">(주) 9해조팀</p>
+        <pre><p>movie for you enjoy with your friends or someone who want to see movie with you</p></pre>
+        <pre>Copyright© LSJ KMJ seezone corp. All rights reserved.</pre>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -97,5 +117,8 @@ body::-webkit-scrollbar-track {
 }
 .hoverpink:hover {
   color: palevioletred;
+}
+footer {
+  color: rgb(117, 106, 106)
 }
 </style>
