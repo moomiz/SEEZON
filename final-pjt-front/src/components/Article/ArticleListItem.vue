@@ -1,6 +1,6 @@
 <template>
   <tr class="selectedTr">
-    <td style="font-size: 80%"><router-link class="text-decoration-none hoverpink" :to="{ name: 'moviedetailpage', params: { id: movie.id } }">{{ movie?.title }}</router-link></td>
+    <td style="font-size: 80%"><router-link class="text-decoration-none hoverpink" :to="{ name: 'moviedetailpage', params: { id: movie?.id } }">{{ movie?.title }}</router-link></td>
     <td><router-link style="color:palevioletred" class="text-decoration-none" :to="{ name: 'articledetail', params: { id: article?.id }}">{{ article?.title }}</router-link></td>
     <td>{{ article?.like_users.length }}</td>
     <td><router-link style="color:plum" class="text-decoration-none" :to="{ name: 'profile', params: { username: article.username} }">{{ article.username }}</router-link></td>

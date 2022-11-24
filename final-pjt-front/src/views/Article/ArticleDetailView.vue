@@ -5,6 +5,7 @@
         <header class="articleDetailHeader">
           <router-link style="text-decoration-line: none; color:palevioletred" to="."><h4>X</h4></router-link>
           <div class="upde">
+          <span class="mx-5">{{ article?.username }}</span>
           <router-link style="text-decoration-line: none; padding-right: 5px;" class="hoverpink" :to="{ name: 'articleupdate' }" >수정</router-link>
           <a style="text-decoration-line: none;" class="hoverpink" href="#" @click="deleteArticle">삭제</a>
           </div>
