@@ -14,6 +14,7 @@ import ProfileView from '@/views/Account/ProfileView'
 import ProfileUpdateView from '@/views/Account/ProfileUpdateView'
 import MovieDetailPageView from '@/views/Movie/MovieDetailPageView'
 import MovieRelatedArticleCreateView from '@/views/Article/MovieRelatedArticleCreateView'
+import MovieFilterView from '@/views/Movie/MovieFilterView'
 
 Vue.use(VueRouter)
 
@@ -98,6 +99,11 @@ const routes = [
     path: '/movie/:id/article/create',
     name: 'movierelatedarticle',
     component: MovieRelatedArticleCreateView,
+  },
+  {
+    path: '/movie/filter',
+    name: 'moviefilter',
+    component: MovieFilterView,
   },
 ]
 

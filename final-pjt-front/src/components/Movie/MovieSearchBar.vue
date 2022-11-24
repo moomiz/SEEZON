@@ -1,6 +1,6 @@
 <template>
     <div class="SearchBar" >
-        <h5 style="background-color:transparent; padding-left: 10px;" v-b-modal.modal-1>Search</h5>
+        <h5 class="hoverpink" style="background-color:transparent; padding-left: 10px;" v-b-modal.modal-1>Search</h5>
         <b-modal id="modal-1" title="Search">
             <input type="text"
             v-model="MovieTitleSearchString" 

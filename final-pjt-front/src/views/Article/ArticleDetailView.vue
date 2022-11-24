@@ -7,7 +7,7 @@
           <div class="upde">
           <router-link style="text-decoration-line: none; padding-right: 5px;" class="hoverpink" :to="{ name: 'articleupdate' }" >수정</router-link>
           <a style="text-decoration-line: none;" class="hoverpink" href="#" @click="deleteArticle">삭제</a>
-        </div>
+          </div>
         </header>
         <hr>
         <div class="articleTitle">
@@ -18,12 +18,12 @@
         <span class="heart" v-if="!isIn" @click="articleLike"><h5>🤍</h5></span>
         </div>
         <hr>
-        <p class="articleContent">{{ article?.content }}</p>
+        <pre class="articleContent">{{ article?.content }}</pre>
         <hr>
         <CommentCreateForm class="commentForm"
         @new-comment="commetAdd" />
         <hr>
-        <ArticleCommentList class="articleCommentList" :comments=article?.comment_set />
+        <ArticleCommentList class="articleCommentList mb-4" :comments=article?.comment_set />
       </div>
     </div>
   </div>
@@ -108,6 +108,7 @@ export default {
   display: flex;
   text-decoration-line: none ;
   text-align: center;
+  height: 15px;
 }
 .upde{
   margin-left: auto;
@@ -123,8 +124,8 @@ export default {
 .articleContent{
   display: flex;
   text-align:start ;
-  padding-top:30px;
-  padding-bottom:30px;
+  padding:20px;
+  min-height: 300px;
 }
 .commentForm{
   text-align:start ;

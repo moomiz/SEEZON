@@ -17,9 +17,9 @@
       />
     </table>
     <div>
-      <button :disabled="pageNum === 0" @click="prevPage">Back</button>
-      <span>{{ pageNum + 1 }} / {{ pageCount }} 페이지</span>
-      <button :disabled="pageNum >= pageCount - 1" @click="nextPage">Next</button>
+      <span v-if="pageNum !== 0" class="hoverpink" @click="prevPage">Back</span>
+      <span class="mx-3">{{ pageNum + 1 }} / {{ pageCount }}</span>
+      <span v-if="pageNum < pageCount - 1"  class="hoverpink" @click="nextPage">Next</span>
     </div>
     <!-- <ArticleListItem 
       v-for="article in articles"
@@ -123,5 +123,11 @@ table tr td {
 }
 .btn-cover .page-count {
   padding: 0 1rem;
+}
+.hoverpink {
+  color: white
+}
+.hoverpink:hover {
+  color: palevioletred;
 }
 </style>

@@ -12,6 +12,20 @@ from .models import Genre, Movie, Review
 
 # Create your views here.
 @api_view(['GET'])
+def genre_list(request):
+    genres = get_list_or_404(Genre)
+    serializer = GenreSerializer(genres, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def genre_filter(request, genre_pk):
+    movies = get_list_or_404(Movie, genres=genre_pk)
+    serializer = MovieSerializer(movies, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
 def movie_list(request):
     movies = get_list_or_404(Movie)
     serializer = MovieSerializer(movies, many=True)

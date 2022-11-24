@@ -1,8 +1,8 @@
 <template>
   <div>
-    <form class="createComment">
+    <form @submit.prevent="createComment" class="createComment">
       <label for="content" ></label>
-      <input class="contentForm" type="text" id="content" v-model="content" placeholder="댓글을 입력하세요...">
+      <input class="contentForm" @keyup.enter="createComment" type="text" id="content" v-model="content" placeholder="댓글을 입력하세요...">
       <p class="mt-2 hoverpink" @click="createComment">CREATE</p>
     </form>
   </div>

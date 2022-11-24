@@ -1,6 +1,6 @@
 <template>
-  <tr>
-    <td style="font-size: 80%">{{ movieTitle }}</td>
+  <tr class="selectedTr">
+    <td style="font-size: 80%"><router-link class="text-decoration-none hoverpink" :to="{ name: 'moviedetailpage', params: { id: movie.id } }">{{ movie?.title }}</router-link></td>
     <td><router-link style="color:palevioletred" class="text-decoration-none" :to="{ name: 'articledetail', params: { id: article?.id }}">{{ article?.title }}</router-link></td>
     <td>{{ article?.like_users.length }}</td>
     <td><router-link style="color:plum" class="text-decoration-none" :to="{ name: 'profile', params: { username: article.username} }">{{ article.username }}</router-link></td>
@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      movieTitle: null,
+      movie: null,
     }
   },
   methods: {
@@ -34,7 +34,7 @@ export default {
       method: 'get',
       url: `http://127.0.0.1:8000/api/v1/movies/${this.article.movie}/`,
       }).then((res)=>{
-        this.movieTitle = res.data.title
+        this.movie = res.data
       })
     }
   },
@@ -47,4 +47,13 @@ export default {
 </script>
 
 <style>
+.hoverpink {
+  color: white
+}
+.hoverpink:hover {
+  color: palevioletred;
+}
+.selectedTr:hover {
+  background-color: rgba(216, 112, 147, 0.247);
+}
 </style>

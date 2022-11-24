@@ -2,9 +2,9 @@
   <div>
     <form class="createReview" @submit.prevent="createMovieReview" >
       <label for="content"></label>
-      <input class="contentForm w-50 pr-3" type="text" id="content" v-model="content">
+      <input class="contentForm w-50 pr-3" type="text" id="content" v-model="content" @keyup.enter="createMovieReview">
       <span style="color:transparent">...</span>
-      <input class="b" type="submit" value="create">
+      <p class="mt-2 hoverpink" @click="createMovieReview">CREATE</p>
     </form>
     
   </div>
@@ -67,5 +67,11 @@ export default {
   display: flex;
   justify-content:center;
   padding-right: 10px;
+}
+.hoverpink {
+  color: white
+}
+.hoverpink:hover {
+  color: palevioletred;
 }
 </style>

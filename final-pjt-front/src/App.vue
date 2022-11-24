@@ -6,8 +6,8 @@
         <router-link style="padding-right:10px" v-if="!isLogin" :to="{ name: 'login' }"><h5 class="mx-2 hoverpink">Login</h5></router-link>
         <router-link style="padding-right:10px" v-if="isLogin" :to="{ name: 'logout' }"><h5 class="mx-2 hoverpink">Logout</h5></router-link> 
         <router-link style="padding-right:10px" :to="{ name: 'article' }"><h5 class="mx-1 hoverpink">Article</h5></router-link>
-        <span v-if="isLogin"></span>
-        <router-link style="padding-right:10px; padding-left: 5px;" v-if="isLogin" :to="{ name: 'profile', params: { username: recentUser } }"><h5 class="hoverpink">Profile</h5></router-link> 
+        <router-link style="padding-right:10px" v-if="isLogin" :to="{ name: 'profile', params: { username: recentUser } }"><h5 class="hoverpink">Profile</h5></router-link> 
+        <router-link style="padding-right:10px; padding-left: 5px;" :to="{ name: 'moviefilter' }"><h5 class="mx-1 hoverpink">Filter</h5></router-link>
         <MovieSearchBar />
       </div>
     </nav>
