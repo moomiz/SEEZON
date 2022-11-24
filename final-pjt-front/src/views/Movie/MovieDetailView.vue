@@ -2,24 +2,27 @@
   <div class="detail">
     <div class="title">
       <h3 class="m-3">{{ movie?.title }}</h3>
-      <div>
-        <span class="mx-3" v-if="isIn" @click="movieLike">💖</span>
-        <span class="mx-3" v-if="!isIn" @click="movieLike">🤍</span>
-        <span>{{ movieLikeUsers }}</span>
-        <router-link to="../">[BACK]</router-link>
+        <router-link style="text-decoration-line: none; color:palevioletred" :to="{ name: 'index' }"><h1>⬅</h1></router-link>
+    </div>
+    <div class="middle">
+      <img class="moviePoster" :src="`https://www.themoviedb.org/t/p/w500/${movie?.poster_path}`" :alt="movie?.title">
+      <div class="middleLeft">
+        <div class="like">
+          <span class="mx-3" v-if="isIn" @click="movieLike">💖</span>
+          <span class="mx-3" v-if="!isIn" @click="movieLike">🤍</span>
+          <span>{{ movieLikeUsers }}</span>
+        </div>
+        <p >{{ movie?.overview }}</p>
+        <hr>
+        <span v-for="genre in movie?.genres" class="px-2" :key="genre?.id">{{ genre?.name }}</span>
+        <MovieArticle :articles=articles />
+        <router-link :to="{ name: 'movierelatedarticle', params: { id: movie?.id } }">[NEW ARTICLE]</router-link>
       </div>
     </div>
-    <div>
-      <img :src="`https://www.themoviedb.org/t/p/w500/${movie?.poster_path}`" :alt="movie?.title">
-      <p>{{ movie?.overview }}</p>
-      <p v-for="genre in movie?.genres" :key="genre?.id">{{ genre?.name }}</p>
-    </div>
-    <MovieReview :reviews=reviews 
+    <hr>
+    <MovieReview class="movieReview" :reviews=reviews 
       @new-review="reviewAdd"
     />
-    <hr>
-    <MovieArticle :articles=articles />
-    <router-link :to="{ name: 'movierelatedarticle', params: { id: movie?.id } }">[NEW ARTICLE]</router-link>
     <!-- {{ reviews }} -->
     <!-- <div class="movie-info">
       <p>{{ movie?.title }}</p>

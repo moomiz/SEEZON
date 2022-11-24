@@ -1,26 +1,32 @@
 <template>
-  <div class="d-flex justify-content-center" style="width: 100%; min-height: 100vh;">
-    <div class="w-75">
-      <hr>
-      <h3>{{ article?.title }}</h3>
-      <span>{{ articleLikeUsers }}</span>
-      <!-- {{ article?.like_users }} -->
-      <span v-if="isIn" @click="articleLike">💖</span>
-      <span v-if="!isIn" @click="articleLike">🤍</span>
-      <br>
-      <div class="justify-content-between">
-        <router-link :to="{ name: 'articleupdate' }" >[UPDATE]</router-link>
-        <a href="#" @click="deleteArticle">[DELETE]</a>
+  <div style="width: 100%; min-height: 100vh;">
+    <div class="articleBack" >
+      <div class="w-50">
+        <header>
+          <router-link style="text-decoration-line: none; color:palevioletred" to="."><h1>⬅</h1></router-link>
+          <div class="upde">
+          <router-link style="text-decoration-line: none; padding-right: 5px; " :to="{ name: 'articleupdate' }" ><button class="b" >수정</button></router-link>
+          <a style="text-decoration-line: none; " href="#" @click="deleteArticle"><button class="b">삭제</button></a>
+        </div>
+        </header>
+        <hr>
+        <div class="articleTitle">{{ article?.title }}
+          <span class="likeUser">{{ articleLikeUsers }}</span>
+        <!-- {{ article?.like_users }} -->
+        <span v-if="isIn" @click="articleLike">💖</span>
+        <span v-if="!isIn" @click="articleLike">🤍</span>
+        </div>
+        <hr>
+        <p class="articleContent">{{ article?.content }}</p>
+        <hr>
+        <CommentCreateForm class="commentForm"
+        @new-comment="commetAdd" />
+        <hr>
+        <ArticleCommentList class="articleCommentList" :comments=article?.comment_set />
       </div>
-      <p>{{ article?.content }}</p>
-      <hr>
-      <CommentCreateForm 
-      @new-comment="commetAdd" />
-      <hr>
-      <ArticleCommentList :comments=article?.comment_set />
-      <router-link to=".">[BACK]</router-link>
     </div>
   </div>
+  
 </template>
 
 <script>
@@ -90,5 +96,50 @@ export default {
 </script>
 
 <style>
+.articleBack{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  background-color: black;
+
+}
+header{
+  display: flex;
+  text-decoration-line: none ;
+  text-align: center;
+}
+.upde{
+  margin-left: auto;
+}
+.articleTitle {
+  display: flex;
+  margin-right: auto ;
+  background-color:black;
+
+}
+.likeUser{
+  margin-left: auto;
+}
+.articleContent{
+  display: flex;
+  text-align:start ;
+  height:30%;
+  padding-top:30px;
+  padding-bottom:30px;
+}
+.commentForm{
+  text-align:start ;
+}
+.articleCommentList{
+  text-align:start ;
+}
+.b{
+  font-size:15px;
+  border-radius: 10px;
+  background-color: transparent;
+  color:palevioletred;
+  border-color:palevioletred;
+}
 
 </style>

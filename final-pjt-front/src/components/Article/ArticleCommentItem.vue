@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="!this.delete" class="d-flex justify-content-center">
-      <div class="w-75 d-flex">
+      <div class="w-100 d-flex">
         <p class="pl-3" style="width: 10%"><router-link :to="{ name: 'profile', params: { username: comment?.username} }">{{ comment?.username }}</router-link></p>
         <p>: </p>
         <p style="display:inline-block; word-break: break-all; width: 70%; height: auto;" ref="edited">{{ comment?.content }}</p>

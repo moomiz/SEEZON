@@ -1,9 +1,9 @@
 <template>
   <div>
-    <form @submit.prevent="createComment" >
-      <label for="content">댓글내용: </label>
-      <input type="text" id="content" v-model="content">
-      <input type="submit" value="create">
+    <form class="createComment" @submit.prevent="createComment" >
+      <label for="content" ></label>
+      <input class="contentForm" type="text" id="content" v-model="content" placeholder="댓글을 입력하세요...">
+      <input class="b" type="submit" value="create">
     </form>
     
   </div>
@@ -49,5 +49,21 @@ export default {
 </script>
 
 <style>
-
+.contentForm{
+  width: 88%;
+  border-radius: 10px;
+  height: 35px;
+}
+.b{
+  font-size:15px;
+  border-radius: 10px;
+  background-color: transparent;
+  color:palevioletred;
+  border-color:palevioletred;
+  height: 30px;
+}
+.createComment {
+  display: flex;
+  justify-content:space-between
+}
 </style>
