@@ -7,8 +7,8 @@
         <p style="display:inline-block; word-break: break-all; width: 70%; height: auto;" ref="edited">{{ review.content }}</p>
         <p class="px-3" @click="edit=!edit">edit</p>
         <p class="px-3" @click="reviewDelete">delete</p>
-        <p class="px-3" v-if="!isIn" @click="reviewLike">🤍</p>
-        <p class="px-3" v-if="isIn" @click="reviewLike">💖</p>
+        <p class="px-3 hoverpink" v-if="!isIn" @click="reviewLike">🤍</p>
+        <p class="px-3 hoverpink" v-if="isIn" @click="reviewLike">💖</p>
         <p>{{ reviewLikeUsers }}</p><br>
       </div>
     </div>
@@ -99,5 +99,10 @@ export default {
 </script>
 
 <style>
-
+.hoverpink {
+  color: white;
+}
+.hoverpink:hover {
+  color: palevioletred;
+}
 </style>

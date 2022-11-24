@@ -5,16 +5,17 @@
         <header class="articleDetailHeader">
           <router-link style="text-decoration-line: none; color:palevioletred" to="."><h4>X</h4></router-link>
           <div class="upde">
-          <router-link style="text-decoration-line: none; padding-right: 5px; " :to="{ name: 'articleupdate' }" ><button class="b" >수정</button></router-link>
-          <a style="text-decoration-line: none; " href="#" @click="deleteArticle"><button class="b">삭제</button></a>
+          <router-link style="text-decoration-line: none; padding-right: 5px;" class="hoverpink" :to="{ name: 'articleupdate' }" >수정</router-link>
+          <a style="text-decoration-line: none;" class="hoverpink" href="#" @click="deleteArticle">삭제</a>
         </div>
         </header>
         <hr>
-        <div class="articleTitle">{{ article?.title }}
-          <span class="likeUser">{{ articleLikeUsers }}</span>
+        <div class="articleTitle">
+        <span><h4>{{ article?.title }}</h4></span>
+        <span class="likeUser">{{ articleLikeUsers }}</span>
         <!-- {{ article?.like_users }} -->
-        <span v-if="isIn" @click="articleLike">💖</span>
-        <span v-if="!isIn" @click="articleLike">🤍</span>
+        <span class="heart" v-if="isIn" @click="articleLike"><h5>💖</h5></span>
+        <span class="heart" v-if="!isIn" @click="articleLike"><h5>🤍</h5></span>
         </div>
         <hr>
         <p class="articleContent">{{ article?.content }}</p>
@@ -117,7 +118,6 @@ export default {
   display: flex;
   margin-right: auto ;
   background-color:black;
-
 }
 .likeUser{
   margin-left: auto;
@@ -135,12 +135,21 @@ export default {
 .articleCommentList{
   text-align:start ;
 }
-.b{
-  font-size:15px;
-  border-radius: 10px;
-  background-color: transparent;
-  color:palevioletred;
-  border-color:palevioletred;
+.hoverpink {
+  color: white
 }
-
+.hoverpink:hover {
+  color: palevioletred;
+}
+.heart:hover{
+  filter:alpha(opacity=70);
+  opacity:.7;
+  filter:alpha(opacity=100);
+  opacity:1;
+  -ms-transform:rotate(10deg);
+  -webkit-transform:rotate(10deg);
+  transform:rotate(10deg);
+  transition:opacity .3s;
+  -webkit-transition:opacity .3s;transition:opacity .3s;
+  }
 </style>

@@ -8,8 +8,8 @@
       <img class="moviePoster" :src="`https://www.themoviedb.org/t/p/w500/${movie?.poster_path}`" :alt="movie?.title">
       <div class="middleLeft">
         <div class="like">
-          <span class="mx-3" v-if="isIn" @click="movieLike">💖</span>
-          <span class="mx-3" v-if="!isIn" @click="movieLike">🤍</span>
+          <span class="mx-3 hoverpink" v-if="isIn" @click="movieLike">💖</span>
+          <span class="mx-3 hoverpink" v-if="!isIn" @click="movieLike">🤍</span>
           <span>{{ movieLikeUsers }}</span>
         </div>
         <p >{{ movie?.overview }}</p>
@@ -175,5 +175,11 @@ export default {
 
 .detail {
   color: #2c3e50;
+}
+.hoverpink {
+  color: white
+}
+.hoverpink:hover {
+  color: palevioletred;
 }
 </style>

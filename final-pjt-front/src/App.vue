@@ -3,11 +3,11 @@
     <nav>
       <router-link style="color: #ed1b64;" :to="{ name: 'index' }"><h3>seezone</h3></router-link>
       <div class=navbarleft>
-        <router-link style="padding-right:10px" v-if="!isLogin" :to="{ name: 'login' }"><h4>Login</h4></router-link>
-        <router-link style="padding-right:10px" v-if="isLogin" :to="{ name: 'logout' }"><h4>Logout</h4></router-link> 
-        <router-link style="padding-right:10px" :to="{ name: 'article' }"><h4>Article</h4></router-link>
+        <router-link style="padding-right:10px" v-if="!isLogin" :to="{ name: 'login' }"><h5 class="mx-2 hoverpink">Login</h5></router-link>
+        <router-link style="padding-right:10px" v-if="isLogin" :to="{ name: 'logout' }"><h5 class="mx-2 hoverpink">Logout</h5></router-link> 
+        <router-link style="padding-right:10px" :to="{ name: 'article' }"><h5 class="mx-1 hoverpink">Article</h5></router-link>
         <span v-if="isLogin"></span>
-        <router-link style="padding-right:10px" v-if="isLogin" :to="{ name: 'profile', params: { username: recentUser } }"><h4>Profile</h4></router-link> 
+        <router-link style="padding-right:10px; padding-left: 5px;" v-if="isLogin" :to="{ name: 'profile', params: { username: recentUser } }"><h5 class="hoverpink">Profile</h5></router-link> 
         <MovieSearchBar />
       </div>
     </nav>
@@ -90,5 +90,12 @@ body::-webkit-scrollbar-thumb {
 
 body::-webkit-scrollbar-track {
     background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
+.hoverpink {
+  color: white
+}
+.hoverpink:hover {
+  color: palevioletred;
 }
 </style>

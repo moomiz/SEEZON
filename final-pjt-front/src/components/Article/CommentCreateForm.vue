@@ -1,11 +1,10 @@
 <template>
   <div>
-    <form class="createComment" @submit.prevent="createComment" >
+    <form class="createComment">
       <label for="content" ></label>
       <input class="contentForm" type="text" id="content" v-model="content" placeholder="댓글을 입력하세요...">
-      <input class="b" type="submit" value="create">
+      <p class="mt-2 hoverpink" @click="createComment">CREATE</p>
     </form>
-    
   </div>
 </template>
 
@@ -54,16 +53,14 @@ export default {
   border-radius: 10px;
   height: 35px;
 }
-.b{
-  font-size:15px;
-  border-radius: 10px;
-  background-color: transparent;
-  color:palevioletred;
-  border-color:palevioletred;
-  height: 30px;
-}
 .createComment {
   display: flex;
   justify-content:space-between
+}
+.hoverpink {
+  color: white
+}
+.hoverpink:hover {
+  color: palevioletred;
 }
 </style>
