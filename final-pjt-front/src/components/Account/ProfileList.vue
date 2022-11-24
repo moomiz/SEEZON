@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="row">
     <!-- {{ pageName }} -->
     <ProfileListItem
     v-for="item in list"

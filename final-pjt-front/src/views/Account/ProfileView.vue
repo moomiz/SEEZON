@@ -18,6 +18,9 @@
               <p class="desc-stat">Following</p>
             </div>
           </div>
+            <button class="unregister" v-if="user?.username === recentUser" @click="withDrawal" >회원탈퇴</button>
+            <hr>
+            <router-link class="profileUpdate" :to="{ name: 'profile-update', params: { username: recentUser }}" v-if="user?.username === recentUser">profile 수정</router-link>
         </div>
         <div class="right">
           <ul class="nav">
@@ -29,16 +32,12 @@
             <p @click="likeComment" :class="{clicked: likeCommentclicking}">{{ user?.username }}님이 좋아요 한 댓글</p>
           </ul>
           
-          <button v-if="user?.username === recentUser" @click="withDrawal" >회원탈퇴</button>
         </div>
         <div class="middle">
-          <router-link :to="{ name: 'profile-update', params: { username: recentUser }}" v-if="user?.username === recentUser">회원 정보 수정</router-link>
-          <hr>
-          
         </div>
       </main>
       <div class="profileArticle">
-        <ProfileList class="col-md-4"
+        <ProfileList
         :list=list 
         :page-name=pageName
         :is-what=isWhat />
@@ -324,9 +323,9 @@ main {
   border-bottom: 1px solid #ededed;
 }
 
-.right {
+/* .right {
   padding: 0 25px 0 25px !important;
-}
+} */
 
 .nav {
   display: inline-flex;
@@ -401,4 +400,36 @@ main {
 .row{
   margin:10px
 }
+.unregister{
+  right: 8%;
+  top: 35px;
+  font-size: 11pt;
+  background-color: #8842fa;
+  color: #fff;
+  padding: 8px 15px;
+  width: 30%;
+  cursor: pointer;
+  transition: all .4s;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  border: transparent;
+  height: 40px;
+}
+.profileUpdate{
+  right: 8%;
+  top: 35px;
+  font-size: 11pt;
+  background-color: #fa42e4;
+  color: #fff;
+  padding: 8px 15px;
+  width: 30%;
+  cursor: pointer;
+  transition: all .4s;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  border: transparent;
+  text-decoration-line: none;
+  height: 40px;
+}
+
 </style>

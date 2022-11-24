@@ -2,8 +2,8 @@
   <div style="width: 100%; min-height: 100vh;">
     <div class="articleBack" >
       <div class="w-50">
-        <header>
-          <router-link style="text-decoration-line: none; color:palevioletred" to="."><h1>⬅</h1></router-link>
+        <header class="articleDetailHeader">
+          <router-link style="text-decoration-line: none; color:palevioletred" to="."><h4>X</h4></router-link>
           <div class="upde">
           <router-link style="text-decoration-line: none; padding-right: 5px; " :to="{ name: 'articleupdate' }" ><button class="b" >수정</button></router-link>
           <a style="text-decoration-line: none; " href="#" @click="deleteArticle"><button class="b">삭제</button></a>
@@ -102,12 +102,13 @@ export default {
   width: 100%;
   min-height: 100vh;
   background-color: black;
-
+  font-size: 15px
 }
-header{
+.articleDetailHeader{
   display: flex;
   text-decoration-line: none ;
   text-align: center;
+  height: 3%;
 }
 .upde{
   margin-left: auto;
