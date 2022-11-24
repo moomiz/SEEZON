@@ -1,23 +1,48 @@
 <template>
-  <div style="width: 100%; min-height: 100vh;">
-    <p>{{ user?.username }}님의 프로필입니다.</p>
-    <div v-if="user?.username!==recentUser">
-      <button class="follow" v-if="!isIn" @click="userFollow" >follow</button>
-      <button class="follow" v-if="isIn" @click="userFollow" >unfollow</button>
-    </div>
-    <p>팔로워: {{ userFollowers }}</p>
-    <p>팔로잉: {{ user?.followings.length }}</p>
-    <p>first name : {{ user?.first_name }}</p>
-    <p>last name : {{ user?.last_name }}</p>
-    <button v-if="user?.username === recentUser" @click="withDrawal" >회원탈퇴</button>
-    <router-link :to="{ name: 'profile-update', params: { username: recentUser }}" v-if="user?.username === recentUser">회원 정보 수정</router-link>
-    <hr>
-    <h3><span @click="likeMovie" :class="{clicked: likeMovieclicking}">{{ user?.username }}님이 좋아하는 영화</span> | <span @click="reviewMovie" :class="{clicked: reviewMovieclicking}">{{ user?.username }}님이 리뷰를 쓴 영화</span><br><span @click="writeArticle" :class="{clicked: writeArticleclicking}">{{ user?.username }}님이 작성하신 게시글</span> | <span @click="likeArticle" :class="{clicked: likeArticleclicking}">{{ user?.username }}님이 좋아요 한 게시글</span><br><span @click="writeComment" :class="{clicked: writeCommentclicking}">{{ user?.username }}님이 작성하신 댓글</span> | <span @click="likeComment" :class="{clicked: likeCommentclicking}">{{ user?.username }}님이 좋아요 한 댓글</span></h3>
-    
-    <ProfileList
-    :list=list 
-    :page-name=pageName
-    :is-what=isWhat />
+  <div class="container" style="width: 100%; min-height: 100vh;">
+  <main>
+    <div class="row">
+        <h4 class="name">{{ user?.username }}님의 프로필입니다.</h4>
+        <p class="info">{{ user?.first_name }}{{ user?.last_name }}</p>
+        <div v-if="user?.username!==recentUser">
+          <button class="follow" v-if="!isIn" @click="userFollow" >follow</button>
+          <button class="follow" v-if="isIn" @click="userFollow" >unfollow</button>
+        </div>
+          <div class="stats">
+            <div class="stat" style="padding-right: 50px;">
+              <p class="number-stat">{{ userFollowers }}</p>
+              <p class="desc-stat">Followers</p>
+            </div>
+            <div class="stat">
+              <p class="number-stat" >{{ user?.followings.length }}</p>
+              <p class="desc-stat">Following</p>
+            </div>
+          </div>
+        </div>
+        <div class="right">
+          <ul class="nav">
+            <p @click="likeMovie" :class="{clicked: likeMovieclicking}">{{ user?.username }}님이 좋아하는 영화</p>
+            <p @click="reviewMovie" :class="{clicked: reviewMovieclicking}">{{ user?.username }}님이 리뷰를 쓴 영화</p>
+            <p @click="writeArticle" :class="{clicked: writeArticleclicking}">{{ user?.username }}님이 작성하신 게시글</p>
+            <p @click="likeArticle" :class="{clicked: likeArticleclicking}">{{ user?.username }}님이 좋아요 한 게시글</p>
+            <p @click="writeComment" :class="{clicked: writeCommentclicking}">{{ user?.username }}님이 작성하신 댓글</p>
+            <p @click="likeComment" :class="{clicked: likeCommentclicking}">{{ user?.username }}님이 좋아요 한 댓글</p>
+          </ul>
+          
+          <button v-if="user?.username === recentUser" @click="withDrawal" >회원탈퇴</button>
+        </div>
+        <div class="middle">
+          <router-link :to="{ name: 'profile-update', params: { username: recentUser }}" v-if="user?.username === recentUser">회원 정보 수정</router-link>
+          <hr>
+          
+        </div>
+      </main>
+      <div class="profileArticle">
+        <ProfileList class="col-md-4"
+        :list=list 
+        :page-name=pageName
+        :is-what=isWhat />
+      </div>
 
     <!-- <p v-for="movie in user?.like_movies" :key="movie.id"><router-link :to="{ name: 'moviedetailpage', params: { id: movie.id } }">{{ movie?.title }}</router-link></p>
     <hr>
@@ -173,14 +198,207 @@ export default {
 </script>
 
 <style>
-.follow {
-  border: 1px solid rgb(255, 25, 94);
-  background-color: rgba(255, 255, 255, 0);
-  color: rgb(255, 25, 94);
-  border-radius: 10%;
-  margin-bottom: 1%;
-}
+
 .clicked {
   color: rgb(255, 25, 94);
+}
+
+html,body {
+  background: #efefef;
+  font-family: "Arial";
+}
+
+.container {
+  max-width: 1250px;
+  margin: 30px auto 30px;
+  padding: 0 !important;
+  width: 90%;
+  background-color: black;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
+}
+
+header {
+  background: gra;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 250px;
+}
+
+header i {
+  position: relative;
+  cursor: pointer;
+  right: -96%;
+  top: 25px;
+  font-size: 18px !important;
+  color: #fff;
+}
+
+@media (max-width:800px) {
+  header {
+    height: 150px;
+  } 
+  
+  header i {
+    right: -90%;
+  }
+}
+
+main {
+      padding: 20px 20px 0px 20px;
+      display: inline-flex;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.photo {
+  width: 200px;
+  height: 200px;
+  margin-top: -120px;
+  border-radius: 100px;
+  border: 4px solid #fff;
+}
+
+
+@media (max-width:990px) {
+  .active {
+    right: calc(50% - 60px);
+    top: 50px;
+  } 
+}
+
+.name {
+  margin-top: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 18pt;
+  color: #777;
+}
+
+.info {
+  margin-top: -5px;
+  margin-bottom: 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11pt;
+  color: #aaa;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ededed;
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+.number-stat {
+  padding: 0px;
+  font-size: 14pt;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  color: #aaa;
+}
+
+.desc-stat {
+  margin-top: -15px;
+  font-size: 10pt;
+  color: #bbb;
+}
+
+.desc {
+  text-align: center;
+  margin-top: 25px;
+  margin: 25px 40px;
+  color: #999;
+  font-size: 11pt;
+  font-family: 'Montserrat', sans-serif;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #ededed;
+}
+
+.right {
+  padding: 0 25px 0 25px !important;
+}
+
+.nav {
+  display: inline-flex;
+}
+
+.nav p {
+  margin: 40px 30px ;
+  font-size: 13pt;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  color: #888;
+}
+
+.nav p:hover{ 
+  color: #999;
+  border-bottom: 2px solid #999;
+}
+
+.follow {
+  right: 8%;
+  top: 35px;
+  font-size: 11pt;
+  background-color: #42b1fa;
+  color: #fff;
+  padding: 8px 15px;
+  width: 30%;
+  cursor: pointer;
+  transition: all .4s;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  border: transparent
+}
+
+.follow:hover {
+  box-shadow: 0 0 15px rgba(0,0,0,0.2), 0 0 15px rgba(0,0,0,0.2);
+}
+
+@media (max-width:990px) {
+  .nav {
+    display: none;
+  }
+  
+  .follow {
+    width: 50%;
+    margin-left: 25%;
+    display: block;
+    position: unset;
+    text-align: center;
+  }
+}
+.gallery  {
+  margin-top: 35px;
+}
+
+.gallery div {
+  margin-bottom: 30px;
+}
+
+.gallery img {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
+  width: auto; 
+  height: auto;
+  cursor: pointer;
+  max-width: 100%;
+}
+.profileArticle{
+  display: flex;
+  justify-content: center;
+  padding-top: 10%;
+}
+.row{
+  margin:10px
 }
 </style>

@@ -5,9 +5,9 @@
       <div class=navbarleft>
         <router-link style="padding-right:10px" v-if="!isLogin" :to="{ name: 'login' }"><h4>Login</h4></router-link>
         <router-link style="padding-right:10px" v-if="isLogin" :to="{ name: 'logout' }"><h4>Logout</h4></router-link> 
-        <router-link :to="{ name: 'article' }"><h4>article</h4></router-link>
-        <span v-if="isLogin"> | </span>
-        <router-link v-if="isLogin" :to="{ name: 'profile', params: { username: recentUser } }">profile</router-link> 
+        <router-link style="padding-right:10px" :to="{ name: 'article' }"><h4>Article</h4></router-link>
+        <span v-if="isLogin"></span>
+        <router-link style="padding-right:10px" v-if="isLogin" :to="{ name: 'profile', params: { username: recentUser } }"><h4>Profile</h4></router-link> 
         <MovieSearchBar />
       </div>
     </nav>
@@ -54,6 +54,7 @@ nav {
   display: flex;
   justify-content: space-between;
   text-align: justify;
+  position: sticky;
 }
 
 nav a {
