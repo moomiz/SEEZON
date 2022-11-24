@@ -1,6 +1,6 @@
 <template>
     <div class="SearchBar" >
-        <b-button v-b-modal.modal-1>🔍</b-button>
+        <h4 style="background-color:transparent; padding-left: 10px;" v-b-modal.modal-1>Search</h4>
         <b-modal id="modal-1" title="Search">
             <input type="text"
             v-model="MovieTitleSearchString" 
@@ -61,9 +61,7 @@ export default {
 </script>
 
 <style>
-.SearchBar{
 
-}
 #modal-1___BV_modal_footer_ button {
    display: none;
 }
@@ -71,4 +69,5 @@ export default {
    background-color:transparent;
    border: transparent;
    }
+
 </style>

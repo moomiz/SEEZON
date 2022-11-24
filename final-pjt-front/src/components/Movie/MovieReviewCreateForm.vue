@@ -3,6 +3,7 @@
     <form class="createReview" @submit.prevent="createMovieReview" >
       <label for="content"></label>
       <input class="contentForm w-50 pr-3" type="text" id="content" v-model="content">
+      <span style="color:transparent">...</span>
       <input class="b" type="submit" value="create">
     </form>
     
@@ -60,9 +61,11 @@ export default {
   color:palevioletred;
   border-color:palevioletred;
   height: 30px;
+  padding-right: 10px;
 }
 .createReview {
   display: flex;
-  justify-content:space-between
+  justify-content:center;
+  padding-right: 10px;
 }
 </style>

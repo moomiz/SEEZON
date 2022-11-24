@@ -1,5 +1,5 @@
 <template>
-  <div class="movie-list">
+  <div class="movie-list" >
     <router-link
         :to="{ name: 'moviedetail', params: { id: movie.id } }">
       <img class="style_prevu_kit" :src="`https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`" :alt="movie.title">
@@ -64,15 +64,16 @@ export default {
   background: #00000000;
 }
 .modal-route .modal-content {
-  width: 90%;
+  width: 70%;
   height: 90%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: white;
+  background: black;
   max-height: calc(100vh - 200px);
   overflow-y: auto;
+  border-radius:12px ;
 }
 .style_prevu_kit
 {
@@ -101,4 +102,18 @@ export default {
     transition: all 200ms ease-in;
     transform: scale(1.2);
 }
+.modal-content::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background:pink; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
 </style>

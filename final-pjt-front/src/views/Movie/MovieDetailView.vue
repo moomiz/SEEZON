@@ -143,7 +143,7 @@ export default {
   right: 0;
   height: 75px;
   padding: 1rem;
-  color:#2c3e50;
+  color: #ed1b64;
   background: rgb(255, 255, 255);
   font-weight: bold;
   display: flex;
