@@ -15,7 +15,7 @@ import ProfileUpdateView from '@/views/Account/ProfileUpdateView'
 import MovieDetailPageView from '@/views/Movie/MovieDetailPageView'
 import MovieRelatedArticleCreateView from '@/views/Article/MovieRelatedArticleCreateView'
 import MovieFilterView from '@/views/Movie/MovieFilterView'
-
+import NotFound from "@/views/NotFound.vue";
 Vue.use(VueRouter)
 
 const routes = [
@@ -105,6 +105,10 @@ const routes = [
     name: 'moviefilter',
     component: MovieFilterView,
   },
+  { 
+    path: '*', 
+    name:"NotFound ",
+    component: NotFound }
 ]
 
 const router = new VueRouter({

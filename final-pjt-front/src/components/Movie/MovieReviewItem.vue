@@ -13,10 +13,10 @@
       </div>
     </div>
     <div v-if="edit">
-      <form @submit.prevent="reviewEdit">
-        <label for="content">수정내용: </label>
-        <input type="text" id="content" v-model="content" @keyup.enter="reviewEdit">
-        <input type="submit" value="Edit">
+      <form class="ml-5">
+        <label for="content">CHANGE → </label>
+        <input class="mx-5" style="width: 40%;" type="text" id="content" v-model="content" @keyup.enter="commentEdit">
+        <span class="mx-2 mt-1 hoverpink" @click="commentEdit">EDIT</span>
       </form>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="detail">
     <div class="title">
-        <h3 class="m-3 " style="padding-left:10%">{{ movie?.title }}</h3>
+      <h3 class="m-3">{{ movie?.title }} ★ {{ movie?.vote_average }}</h3>
         <div>
           <router-link style="text-decoration-line: none; text-align: center; padding-right:200px; color:palevioletred" :to="{ name: 'index' }"><h1>⬅</h1></router-link>
         </div>

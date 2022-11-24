@@ -18,8 +18,8 @@
               <p class="desc-stat">Following</p>
             </div>
           </div>
+
             <button class="unregister" v-if="user?.username === recentUser" @click="withDrawal" >회원탈퇴</button>
-            <hr>
             <router-link class="profileUpdate" :to="{ name: 'profile-update', params: { username: recentUser }}" v-if="user?.username === recentUser">profile 수정</router-link>
         </div>
         <div class="right">
@@ -404,22 +404,23 @@ main {
   right: 8%;
   top: 35px;
   font-size: 11pt;
-  background-color: #8842fa;
+  background-color: #b386fba2;
   color: #fff;
-  padding: 8px 15px;
-  width: 30%;
+   width: 30%;
   cursor: pointer;
   transition: all .4s;
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   border: transparent;
   height: 40px;
+  border-radius: 12px;
+ 
 }
 .profileUpdate{
   right: 8%;
   top: 35px;
   font-size: 11pt;
-  background-color: #fa42e4;
+  background-color: #fa428cb0;
   color: #fff;
   padding: 8px 15px;
   width: 30%;
@@ -430,6 +431,7 @@ main {
   border: transparent;
   text-decoration-line: none;
   height: 40px;
+  border-radius: 12px;
 }
 
 </style>
